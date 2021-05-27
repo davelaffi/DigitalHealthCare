@@ -1,0 +1,82 @@
+<div class="signup-form">
+    <form (submit)="onSignup()" ngNativeValidate #formSignUp>
+        <div id="zeroSection" [ngClass]="{'non-display-section' : controllerSection != 1 }">
+            <div class="form-check vertical-padding10">
+                <input class="form-check-input" type="radio" name="userType" id="medico" value="medico" [(ngModel)]="userType">
+                <label class="form-check-label" for="flexRadioDefault1">
+                    Medico
+                </label>
+            </div>
+            <div class="form-check vertical-padding10">
+                <input class="form-check-input" type="radio" name="userType" id="volontario" value="volontario" [(ngModel)]="userType">
+                <label class="form-check-label" for="flexRadioDefault2">
+                    Volontario
+                </label>
+            </div>
+            <button type="button" class="btn btn-lg btn-primary" (click) = "changeSectionGo()">Inizia Registrazione</button>
+        </div>
+
+        <div id="firstSection" [ngClass]="{'non-display-section' : controllerSection != 2 }">
+            <h2>Registrati</h2>
+            <p class="hint-text">Benvenuto, crea il tuo account</p>
+            <div class="form-group">
+                <div class="row">
+                    <div class="col"><input type="text" class="form-control" name="nome" placeholder="Nome" [(ngModel)]="nome" required></div>
+                    <div class="col"><input type="text" class="form-control" name="cognome" placeholder="Cognome" [(ngModel)]="cognome" required></div>
+                </div>        	
+            </div>
+            <div class="form-group">
+                <input type="email" class="form-control" name="email" placeholder="Email" [(ngModel)]="email" required>
+            </div>
+            <div class="form-group">
+                <input type="password" class="form-control" name="password" placeholder="Password" [(ngModel)]="password" required>
+            </div>
+            <div class="form-group">
+                <input type="password" class="form-control" name="confirm_password" placeholder="Confirm Password" required #passConfirmed>
+            </div>
+            
+            <div id="passError" class="vertical-padding10" [ngClass]="{'non-display-section' : !passwordNotEquals }">
+                <span>Le password non corrispondono</span>
+            </div>
+
+            <div class="row vertical-padding15">
+                <div class="col-md-1"></div>
+                    <div class="col-md-10 text-center">
+                        <button type="button" (click)="password == passConfirmed.value ? changeSectionGo() : passwordError()" class="btn btn-primary btn-lg">Avanti</button>
+                    </div>
+            </div>
+        </div>
+
+        <div id="secondSection" [ngClass]="{'non-display-section' : controllerSection != 3 }">
+            <h2>Register</h2>
+            <p class="hint-text">Benvenuto, crea il tuo account</p>
+            <div class="form-group">
+                <input type="text" class="form-control" name="CF" placeholder="Codice Fiscale" required [(ngModel)]="CF">
+            </div>
+            <div class="form-group">
+                <input type="text" class="form-control" name="telefono" placeholder="telefono" required [(ngModel)]="telefono">
+            </div>
+            <div class="form-group">
+                <input type="text" class="form-control" name="pec" placeholder="PEC" [(ngModel)]="pec">
+            </div>        
+
+
+            <div class="form-group text-center">
+                <label class="form-check-label"><input type="checkbox" required="required"> I accept the <a href="#">Terms of Use</a> &amp; <a href="#">Privacy Policy</a></label>
+            </div>
+
+            <div class="row vertical-padding15">
+                <div class="col-md-1"></div>
+                <div class="col-md-5 text-start">
+                    <button type="button" (click)="changeSectionBack()" class="btn btn-primary btn-lg">Indietro</button>
+                </div>
+                <div class="col-md-5 text-end">
+                    <button type="submit" class="btn btn-lg btn-primary">Registrati</button>
+                </div>
+            </div>
+        </div>
+    </form>
+    <div class="text-center vertical-padding10">Hai già un account? <a style="color : #007bff;" href="/signIn">Effettua il login</a></div>
+
+    
+</div>

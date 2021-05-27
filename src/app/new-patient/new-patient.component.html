@@ -1,0 +1,648 @@
+
+
+<div class="container-fluid">
+    <div class="row">
+        
+        <div class="col-md-2">
+            <!--Se voglio mettere qualcosa nella parte sinistra-->
+        </div>
+
+        <div class="col-md-8">
+            <div class="row">
+                <div class="text-center vertical-padding2">
+                    <h1>Nuovo Paziente</h1>
+                </div>
+            </div>
+            <div class="row" *ngIf="!isFirstTime">
+                <div class="text-center">
+                    <img src="{{patient.photoURL}}" alt="home" width="100" height="100">
+                </div>
+            </div>
+        </div>
+
+        <div class="col-md-2">
+            <div class="col text-center vertical-padding2">
+                <a [routerLink]="['/home']" routerLinkActive="router-link-active">
+                    <img src="./assets/home_icon.jpg" alt="home" width="100" height="100">
+                </a>
+            </div>
+        </div>
+
+    </div>
+
+       
+
+        <div class="row">
+            <div class="col-md-2"></div>
+            <div class="col-md-8">
+                <div class="col text-center">
+                    <h6>Sezione dati personali</h6>
+                </div>
+    
+                <div class="row vertical-padding10 ">
+                    <div class="col-md-1"></div>
+                    <div class="col-md-12">
+                        <hr>
+                    </div>
+                </div>
+
+            <form ngNativeValidate #formNewPatient>
+                
+                <div id="firstSection" [ngClass]="{'non-display-section' : controllerSection != 1 }">
+
+                    <form name="firstSectionForm" id="firstSectionForm"  ngNativeValidate #firstSectionForm="ngForm">
+                        <!--Nome e Cognome-->
+                        <div class="row vertical-padding10 ">
+                            <div class="col-md-1"></div>
+                            <div class="form-group col-md-5"> 
+                                <label for="cognome">Cognome*</label>
+                                <input [(ngModel)]="patient.cognome" name="cognome" type="text" class="form-control" id="cognome" #cognome="ngModel" [readonly]="!isFirstTime" required>
+                                <div *ngIf="cognome.invalid && (cognome.dirty || cognome.touched)"
+                                class="alert alert-danger">
+                                    <div *ngIf="cognome.errors?.required">
+                                        Il campo "Cognome" è obbligatorio
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="form-group col-md-5">
+                                <label for="nome">Nome*</label>
+                                <input [(ngModel)]="patient.nome" name="nome" type="text" class="form-control" id="nome" #nome="ngModel" [readonly]="!isFirstTime" required>
+                                <div *ngIf="nome.invalid && (nome.dirty || nome.touched)"
+                                class="alert alert-danger">
+                                    <div *ngIf="nome.errors?.required">
+                                        Il campo "Nome" è obbligatorio
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+
+                    
+
+                        <!--CF e Sesso-->
+                        <div class="row vertical-padding10">
+                            <div class="col-md-1"></div>
+                            <div class="form-group col-md-5">
+                                <label>CF*</label>
+                                <input [(ngModel)]="patient.CF" name="CFpaziente" type="text" class="form-control" id="CF" #CF="ngModel" [readonly]="!isFirstTime" required>
+                                <div *ngIf="CF.invalid && (CF.dirty || CF.touched)"
+                                class="alert alert-danger">
+                                    <div *ngIf="CF.errors?.required">
+                                        Il campo "CF" è obbligatorio
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="col-md-5">
+                                <label for="sesso">Sesso</label>
+                                <div class="form-check">
+                                    <input class="form-check-input" type="radio" name="sesso" id="maschio" value="Maschio" [(ngModel)]="patient.datiPersonali.sesso">
+                                    <label class="form-check-label" for="flexRadioDefault1">
+                                    Maschio
+                                    </label>
+                                </div>
+                                <div class="form-check">
+                                    <input class="form-check-input" type="radio" name="sesso" id="femmina" value="Femmina" [(ngModel)]="patient.datiPersonali.sesso">
+                                    <label class="form-check-label" for="flexRadioDefault2">
+                                        Femmina
+                                    </label>
+                                </div>
+                                <div class="form-check">
+                                    <input class="form-check-input" type="radio" name="sesso" id="altro" value="Altro" [(ngModel)]="patient.datiPersonali.sesso">
+                                    <label class="form-check-label" for="flexRadioDefault2">
+                                        Altro
+                                    </label>
+                                </div>
+                            </div>
+                        </div>
+
+                        <!--Data di Nascita e Comune-->
+                        <div class="row vertical-padding10">
+                            <div class="col-md-1"></div>
+                            <div class="form-group col-md-5">
+                                <div class="it-datepicker-wrapper">
+                                    <label>Data di Nascita</label>
+                                    <input [(ngModel)]="patient.datiPersonali.dataNascita" name="dataNascita" type="date"  class="form-control it-date-datepicker" id="dataNascita">
+                                </div>
+                            </div>
+                            <div class="form-group col-md-5">
+                                <label>Comune di Nascita</label>
+                                <input [(ngModel)]="patient.datiPersonali.comuneNascita" name="comuneNascita" type="text"  class="form-control" id="comuneNascita">
+                            </div>
+                        </div>
+
+                        <!--Provincia di Nascita e Provincia di domicilio-->
+                        <div class="row vertical-padding10">
+                            <div class="col-md-1"></div>
+                            <div class="form-group col-md-5">
+                                <div class="it-datepicker-wrapper">
+                                    <label>Provincia di nascita</label>
+                                    <input [(ngModel)]="patient.datiPersonali.provinciaNascita" name="provinciaNascita" type="text"  class="form-control" id="provinciaNascita">
+                                </div>
+                            </div>
+                            <div class="form-group col-md-5">
+                                <label>Provincia di domicilio</label>
+                                <input [(ngModel)]="patient.datiPersonali.provinciaDomicilio" name="provinciaDomicilio" type="text"  class="form-control" id="provinciaDomicilio">
+                            </div>
+                        </div>
+                        
+                        <!--Indirizzo di domicilio-->
+                        <div class="row vertical-padding10">
+                            <div class="col-md-1"></div>
+                            <div class="form-group col-md-10">
+                                <label>Indirizzo Domicilio</label>
+                                <input [(ngModel)]="patient.datiPersonali.indirizzoDomicilio" name="indirizzoDomicilio" type="text" class="form-control" id="indirizzoDomicilio">
+                            </div>
+                        </div>
+
+                        <!--CAP e Comune-->
+                        <div class="row vertical-padding10">
+                            <div class="col-md-1"></div>
+                            <div class="form-group col-md-5">
+                                <label>CAP</label>
+                                <input [(ngModel)]="patient.datiPersonali.CAP" name="CAP" type="text" class="form-control" id="CAP">
+                            </div>
+                            <div class="form-group col-md-5">
+                                <label>Comune Domicilio</label>
+                                <input [(ngModel)]="patient.datiPersonali.comuneDomicilio" name="comuneDomicilio" type="text" class="form-control" id="comuneDomicilio">
+                            </div>
+                        </div>
+                        
+                        <!--Telefono-->
+                        <div class="row vertical-padding10">
+                            <div class="col-md-1"></div>
+                            <div class="form-group col-md-5">
+                                <label>Telefono</label>
+                                <input [(ngModel)]="patient.datiPersonali.telefono" name="telefono" type="text" class="form-control" id="telefono">
+                            </div>
+                        </div>
+
+                        <!--email e pec-->
+                        <div class="row vertical-padding10">
+                            <div class="col-md-1"></div>
+                            <div class="form-group col-md-5">
+                                <label>Email</label>
+                                <input [(ngModel)]="patient.datiPersonali.email" name="email" type="text" class="form-control" id="email" placeholder="myname@test.com">
+                            </div>
+                            <div class="form-group col-md-5">
+                                <label>PEC</label>
+                                <input [(ngModel)]="patient.datiPersonali.pec" name="pec" type="text" class="form-control" id="pec">
+                            </div>
+                        </div>
+                        <div class="row vertical-padding15">
+                            <div class="col-md-1"></div>
+                                <div class="col-md-10 text-center">
+                                    <!-- Controllare la sezione e fare apparire un messaggio di errore con un ngIf se c'è 
+                                    un errore di requires-->
+                                    <button type="button" (click)="changeSectionGo()" class="btn btn-primary btn-lg" [disabled]="firstSectionForm.invalid">Avanti</button>
+                                </div>
+                        </div>
+                    </form>
+                </div> 
+                
+                <!--Close first section-->
+
+
+                <!--Start Second section-->
+
+
+                <div id="secondSection" [ngClass]="{'non-display-section' : controllerSection != 2 }">
+
+                    <form name="secondSectionForm" id="secondSectionForm"  ngNativeValidate #secondSectionForm="ngForm">
+                        <!--Codice Esenzione e Reti di patologie-->
+                        <div class="row vertical-padding10 ">
+                            <div class="col-md-1"></div>
+                            <div class="form-group col-md-5"> 
+                                <label for="codiceEsenzione">Codici Esenzione</label>
+                                <input [(ngModel)]="patient.datiMedico.codiceEsenzione" name="codiceEsenzione" type="text" class="form-control" id="codiceEsenzione">
+                            </div>
+                            <div class="form-group col-md-5">
+                                <label for="retiPatologieAssistito">Reti di Patologie assistito</label>
+                                <input [(ngModel)]="patient.datiMedico.retiPatologieAssistito" name="retiPatologieAssistito" type="text" class="form-control" id="retiPatologieAssistito">
+                            </div>
+                        </div>
+
+                        <!--Capacità motoria e Attività lavorativa-->
+                        <div class="row vertical-padding10">
+                            <div class="col-md-1"></div>
+                            <div class="col-md-5">
+                                <label for="capacitaMotoriaAssistito">Capacità Motoria Assistito</label>
+                                <div class="form-check">
+                                    <input class="form-check-input" type="radio" name="capacitaMotoriaAssistito" id="Autonomo" value="Autonomo" [(ngModel)]="patient.datiMedico.capacitaMotoriaAssistito">
+                                    <label class="form-check-label" for="flexRadioDefault1">
+                                    Autonomo
+                                    </label>
+                                </div>
+                                <div class="form-check">
+                                    <input class="form-check-input" type="radio" name="capacitaMotoriaAssistito" id="Assistito" value="Assistito" [(ngModel)]="patient.datiMedico.capacitaMotoriaAssistito">
+                                    <label class="form-check-label" for="flexRadioDefault2">
+                                        Assistito
+                                    </label>
+                                </div>
+                                <div class="form-check">
+                                    <input class="form-check-input" type="radio" name="capacitaMotoriaAssistito" id="Allettato" value="Allettato" [(ngModel)]="patient.datiMedico.capacitaMotoriaAssistito">
+                                    <label class="form-check-label" for="flexRadioDefault2">
+                                        Allettato
+                                    </label>
+                                </div>
+                            </div>
+                            <div class="form-group col-md-5">
+                                <label>Attività Lavorativa</label>
+                                <input [(ngModel)]="patient.datiMedico.attivitaLavorativa" name="attivitaLavorativa" type="text" class="form-control" id="attivitaLavorativa">
+                            </div>
+                        </div>
+
+                        <div class="row vertical-padding10">
+                            <div class="col-md-1"></div>
+                            <div class="col-lg-11">
+                                <label for="patologieCronicheRilevanti">Patologie Croniche Rilevanti</label>
+                                <div class="row">
+                                    <div class="col-md-5 form-group" *ngFor="let item of patologieCroniche; index as i">
+                                        <div class="form-check">
+                                            <input class="form-check-input" (change)="registerCheckbox($event, item.value, patient.datiMedico.patologieCronicheRilevanti)" type="checkbox" name="patologieCronicheRilevanti" id="item.id" value="item.value">
+                                            <label class="form-check-label" for="flexRadioDefault1">
+                                                {{ item.value }}
+                                            </label>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="row vertical-padding10">
+                            <div class="col-md-1"></div>
+                            <div class="form-group col-md-5">
+                                <label>Organi Mancanti</label>
+                                <input [(ngModel)]="patient.datiMedico.organiMancanti" name="organiMancanti" type="text"  class="form-control" id="organiMancanti">
+                            </div>
+                        </div>
+
+                        <!--Trapianti e Rilevanti malformazioni-->
+                        <div class="row vertical-padding10">
+                            <div class="col-md-1"></div>
+                            <div class="form-group col-md-5">
+                                <label>Trapianti</label>
+                                <input [(ngModel)]="patient.datiMedico.trapianti" name="trapianti" type="text" class="form-control" id="trapianti">
+                            </div>
+                            <div class="form-group col-md-5">
+                                <label>Rilevanti Malformazioni</label>
+                                <input [(ngModel)]="patient.datiMedico.rilevantiMalformazioni" name="rilevantiMalformazioni" type="text" class="form-control" id="rilevantiMalformazioni">
+                            </div>
+                        </div>
+
+
+                        <div class="row vertical-padding15">
+                            <div class="col-md-1"></div>
+                            <div class="col-md-5 text-start">
+                                <button type="button" (click)="changeSectionBack()" class="btn btn-primary btn-lg">Indietro</button>
+                            </div>
+                            <div class="col-md-5 text-end">
+                                <button type="button" (click)="changeSectionGo()" class="btn btn-primary btn-lg" [disabled]="secondSectionForm.invalid">Avanti</button>
+                            </div>
+                        </div>
+                    </form>
+
+                </div> 
+                <!--Close Second section-->
+
+                <!--Start Third section-->
+
+                <div id="thirdSection" [ngClass]="{'non-display-section' : controllerSection != 3 }">
+                    <form name="thirdSectionForm" id="thirdSectionForm"  ngNativeValidate #thirdSectionForm="ngForm">
+                        <!--Rilevanti Malformazioni e Reazioni avverse farmaci e alimenti-->
+                        <div class="row vertical-padding10">
+                            <div class="col-md-1"></div>
+                            <div class="form-group col-md-10">
+                                <label>Reazioni avverse farmaci e alimenti</label>
+                                <input [(ngModel)]="patient.datiMedico.reazioniAvverseFarmaciAlimenti" name="reazioniAvverseFarmaciAlimenti" type="text" class="form-control" id="reazioniAvverseFarmaciAlimenti">
+                            </div>
+                        </div>
+                        
+                        <!--Allergie cutanee respiratorie e sitemiche-->
+                        <div class="row vertical-padding10">
+                            <div class="col-md-1"></div>
+                            <div class="form-group col-md-5">
+                                <label>Allergie cutanee respiratorie e sitemiche</label>
+                                <input [(ngModel)]="patient.datiMedico.allergieCutaneeRespiratorieSistemiche" name="allergieCutaneeRespiratorieSistemiche" type="text" class="form-control" id="allergieCutaneeRespiratorieSistemiche">
+                            </div>
+                        </div>
+
+                        <!--Allergie a veleno di imenotteri e Protesi-->
+                        <div class="row vertical-padding10">
+                            <div class="col-md-1"></div>
+                            <div class="form-group col-md-5">
+                                <label>Allergie a veleno di imenotteri</label>
+                                <input [(ngModel)]="patient.datiMedico.allergieVelenoImenotteri" name="allergieVelenoImenotteri" type="text" class="form-control" id="allergieVelenoImenotteri">
+                            </div>
+                            <div class="form-group col-md-5">
+                                <label>Protesi</label>
+                                <input [(ngModel)]="patient.datiMedico.protesi" name="protesi" type="text" class="form-control" id="protesi">
+                            </div>
+                        </div>
+
+                        <div class="row vertical-padding10">
+                            <div class="col-md-1"></div>
+                            <div class="form-group col-md-10">
+                                <label>Ausili</label>
+                                <input [(ngModel)]="patient.datiMedico.ausili" name="ausili" type="text" class="form-control" id="ausili">
+                            </div>
+                        </div>
+
+                        <div class="row vertical-padding15">
+                            <div class="col-md-1"></div>
+                            <div class="col-md-5 text-start">
+                                <button type="button" (click)="changeSectionBack()" class="btn btn-primary btn-lg">Indietro</button>
+                            </div>
+                            <div class="col-md-5 text-end">
+                                <button type="button" (click)="changeSectionGo()" class="btn btn-primary btn-lg" [disabled]="thirdSectionForm.invalid">Avanti</button>
+                            </div>
+                        </div>
+                    </form>
+                </div>
+                <!--Close Third section-->
+                
+                <!--Start Fourth section-->
+
+                <div id="fourthSection" [ngClass]="{'non-display-section' : controllerSection != 4 }">
+                    <form name="fourthSectionForm" id="fourthSectionForm"  ngNativeValidate #fourthSectionForm="ngForm">
+
+                        <!--Terapie Farmacologiche Croniche e Anamnesi Famigliari-->
+                        <div class="row vertical-padding10">
+                            <div class="col-md-1"></div>
+                            <div class="form-group col-md-5">
+                                <label>Terapie Farmacologiche Croniche</label>
+                                <input [(ngModel)]="patient.datiMedico.terapieFarmacologicheCroniche" name="terapieFarmacologicheCroniche" type="text" class="form-control" id="terapieFarmacologicheCroniche">
+                            </div>
+                            <div class="form-group col-md-5">
+                                <label>Anamnesi Famigliari</label>
+                                <input [(ngModel)]="patient.datiMedico.anamnesiFamigliari" name="anamnesiFamigliari" type="text" class="form-control" id="anamnesiFamigliari">
+                            </div>
+                        </div>
+
+                        <!--Fattori di Rischio e terapieFarmacologiche-->
+                        <div class="row vertical-padding10">
+                            <div class="col-md-1"></div>
+                            <div class="form-group col-md-5">
+                                <label>Fattori di Rischio</label>
+                                <input [(ngModel)]="patient.datiMedico.fattoriRischio" name="fattoriRischio" type="text" class="form-control" id="fattoriRischio">
+                            </div>
+                            <div class="form-group col-md-5">
+                                <label>Terapie Farmacologiche</label>
+                                <input [(ngModel)]="patient.datiMedico.terapieFarmacologiche" name="terapieFarmacologiche" type="text" class="form-control" id="terapieFarmacologiche">
+                            </div>
+                        </div>
+
+                        <!--Vaccinazioni-->
+                        <div class="row vertical-padding10">
+                            <div class="col-md-1"></div>
+                            <div class="form-group col-md-10">
+                                <label>Vaccinazioni</label>
+                                <input [(ngModel)]="patient.datiMedico.vaccinazioni" name="vaccinazioni" type="text" class="form-control" id="vaccinazioni">
+                            </div>
+                        </div>
+
+                        <div class="row vertical-padding15">
+                            <div class="col-md-1"></div>
+                            <div class="col-md-5 text-start">
+                                <button type="button" (click)="changeSectionBack()" class="btn btn-primary btn-lg">Indietro</button>
+                            </div>
+                            <div class="col-md-5 text-end">
+                                <button type="button" (click)="changeSectionGo()" class="btn btn-primary btn-lg" [disabled]="fourthSectionForm.invalid">Avanti</button>
+                            </div>
+                        </div>
+                    </form>
+                </div> 
+                <!--Close Fourth section-->
+
+                <!--Start Fifth section-->
+
+                <div id="fifthSection" [ngClass]="{'non-display-section' : controllerSection != 5 }">
+                    <form name="fifthSectionForm" id="fifthSectionForm"  ngNativeValidate #fifthSectionForm="ngForm">
+
+                        <!--Contatto Care Giver e Telefono Care Giver-->
+                        <div class="row vertical-padding10">
+                            <div class="col-md-1"></div>
+                            <div class="form-group col-md-5">
+                                <label>Contatto Care Giver</label>
+                                <input [(ngModel)]="patient.datiMedico.contattoCareGiver" name="contattoCareGiver" type="text" class="form-control" id="contattoCareGiver">
+                            </div>
+                            <div class="form-group col-md-5">
+                                <label>Telefono Care Giver</label>
+                                <input [(ngModel)]="patient.datiMedico.telefonoCareGiver" name="telefonoCareGiver" type="text" class="form-control" id="telefonoCareGiver">
+                            </div>
+                        </div>
+
+                        <!--Donazione Organi-->
+                        <div class="row vertical-padding10">
+                            <div class="col-md-1"></div>
+                            <div class="col-md-5">
+                                <label for="donazioneOrgani">Dichiarazione donazione Organi</label>
+                                <div class="form-check">
+                                    <input class="form-check-input" type="radio" name="donazioneOrgani" id="si" value="Si" [(ngModel)]="patient.datiMedico.donazioneOrgani">
+                                    <label class="form-check-label" for="flexRadioDefault1">
+                                    Si
+                                    </label>
+                                </div>
+                                <div class="form-check">
+                                    <input class="form-check-input" type="radio" name="donazioneOrgani" id="no" value="No" [(ngModel)]="patient.datiMedico.donazioneOrgani">
+                                    <label class="form-check-label" for="flexRadioDefault2">
+                                        No
+                                    </label>
+                                </div>
+                            </div>
+                        </div>
+                        
+                        <!--Patologie in atto -->
+                        <div class="row vertical-padding10">
+                            <div class="col-md-1"></div>
+                            <div class="col-lg-11">
+                                <label for="patologieInAtto">Patologie in atto assistito</label>
+                                <div class="row">
+                                    <div class="col-md-5 form-group" *ngFor="let item of patologieInAttoElenco; index as i">
+                                        <div class="form-check">
+                                            <input class="form-check-input" (change)="registerCheckbox($event, item.value, patient.datiMedico.patologieInAtto)" type="checkbox" name="patologieInAtto" id="item.id" value="item.value">
+                                            <label class="form-check-label" for="flexRadioDefault1">
+                                                {{ item.value }}
+                                            </label>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+
+                        <!--Gravidanze e parti-->
+                        <div class="row vertical-padding10">
+                            <div class="col-md-1"></div>
+                            <div class="form-group col-md-10">
+                                <label>Gravidanze e Parti</label>
+                                <input [(ngModel)]="patient.datiMedico.gravidanzeParti" name="gravidanzeParti" type="text" class="form-control" id="gravidanzeParti">
+                            </div>
+                        </div>
+
+                        <div class="row vertical-padding15">
+                            <div class="col-md-1"></div>
+                            <div class="col-md-5 text-start">
+                                <button type="button" (click)="changeSectionBack()" class="btn btn-primary btn-lg">Indietro</button>
+                            </div>
+                            <div class="col-md-5 text-end">
+                                <button type="button" (click)="changeSectionGo()" class="btn btn-primary btn-lg" [disabled]="fifthSectionForm.invalid">Avanti</button>
+                            </div>
+                        </div>
+
+                    </form>
+                </div>
+
+
+                <!--Close Fifth section-->
+
+                <!--Start Sixth section-->
+
+                <div id="sixthSection" [ngClass]="{'non-display-section' : controllerSection != 6 }">
+                    <form name="sixthSectionForm" id="sixthSectionForm"  ngNativeValidate #sixthSectionForm="ngForm">
+                        <!--Altezza e Peso-->
+                        <div class="row vertical-padding10">
+                            <div class="col-md-1"></div>
+                            <div class="form-group col-md-5">
+                                <label>Altezza (cm)</label>
+                                <input [(ngModel)]="patient.datiMedico.altezza" name="altezza" type="text" class="form-control" id="altezza">
+                            </div>
+                            <div class="form-group col-md-5">
+                                <label>Peso (kg)</label>
+                                <input [(ngModel)]="patient.datiMedico.peso" name="peso" type="text" class="form-control" id="peso">
+                            </div>
+                        </div>
+
+                        <!--Pressione Arteriosa e BMI-->
+                        <div class="row vertical-padding10">
+                            <div class="col-md-1"></div>
+                            <div class="form-group col-md-5">
+                                <label>Pressione Arteriosa</label>
+                                <input [(ngModel)]="patient.datiMedico.pressioneArteriosa" name="pressioneArteriosa" type="text" class="form-control" id="pressioneArteriosa">
+                            </div>
+                            <div class="form-group col-md-5">
+                                <label>BMI</label>
+                                <input [(ngModel)]="patient.datiMedico.BMI" name="BMI" type="text" class="form-control" id="BMI">
+                            </div>
+                        </div>
+
+                        <!--ADI e ADP-->
+                        <div class="row vertical-padding10">
+                            <div class="col-md-1"></div>
+                            <div class="col-md-5">
+                                <label for="ADI">Assistenza domiciliare integrata (ADI)</label>
+                                <div class="form-check">
+                                    <input class="form-check-input" type="radio" name="ADI" id="si" value="Si" [(ngModel)]="patient.datiMedico.ADI">
+                                    <label class="form-check-label" for="flexRadioDefault1">
+                                    Si
+                                    </label>
+                                </div>
+                                <div class="form-check">
+                                    <input class="form-check-input" type="radio" name="ADI" id="no" value="No" [(ngModel)]="patient.datiMedico.ADI">
+                                    <label class="form-check-label" for="flexRadioDefault2">
+                                        No
+                                    </label>
+                                </div>
+                            </div>
+                            <div class="col-md-5">
+                                <label for="ADP">Assistenza domiciliare programmata (ADP)</label>
+                                <div class="form-check">
+                                    <input class="form-check-input" type="radio" name="ADP" id="si" value="Si" [(ngModel)]="patient.datiMedico.ADP">
+                                    <label class="form-check-label" for="flexRadioDefault1">
+                                    Si
+                                    </label>
+                                </div>
+                                <div class="form-check">
+                                    <input class="form-check-input" type="radio" name="ADP" id="no" value="No" [(ngModel)]="patient.datiMedico.ADP">
+                                    <label class="form-check-label" for="flexRadioDefault2">
+                                        No
+                                    </label>
+                                </div>
+                            </div>
+                        </div>
+
+
+                        <!--Gruppo Sanguigno e Fattore RH-->
+                        <div class="row vertical-padding10">
+                            <div class="col-md-1"></div>
+                            <div class="col-md-5">
+                                <label for="gruppoSanguigno">Gruppo sanguigno</label>
+                                <div class="form-check">
+                                    <input class="form-check-input" type="radio" name="gruppoSanguigno" id="0" value="0" [(ngModel)]="patient.datiMedico.gruppoSanguigno">
+                                    <label class="form-check-label" for="flexRadioDefault1">
+                                    0
+                                    </label>
+                                </div>
+                                <div class="form-check">
+                                    <input class="form-check-input" type="radio" name="gruppoSanguigno" id="A" value="A" [(ngModel)]="patient.datiMedico.gruppoSanguigno">
+                                    <label class="form-check-label" for="flexRadioDefault1">
+                                    A
+                                    </label>
+                                </div>
+                                <div class="form-check">
+                                    <input class="form-check-input" type="radio" name="gruppoSanguigno" id="B" value="B" [(ngModel)]="patient.datiMedico.gruppoSanguigno">
+                                    <label class="form-check-label" for="flexRadioDefault1">
+                                    B
+                                    </label>
+                                </div>
+                                <div class="form-check">
+                                    <input class="form-check-input" type="radio" name="gruppoSanguigno" id="AB" value="AB" [(ngModel)]="patient.datiMedico.gruppoSanguigno">
+                                    <label class="form-check-label" for="flexRadioDefault1">
+                                    AB
+                                    </label>
+                                </div>
+                                <div class="form-check">
+                                    <input class="form-check-input" type="radio" name="gruppoSanguigno" id="nonspecificato" value="Non Specificato" [(ngModel)]="patient.datiMedico.gruppoSanguigno">
+                                    <label class="form-check-label" for="flexRadioDefault1">
+                                    Non specificato
+                                    </label>
+                                </div>
+                            </div>
+                            <div class="col-md-5">
+                                <label for="fattoreRH">Fattore RH</label>
+                                <div class="form-check">
+                                    <input class="form-check-input" type="radio" name="fattoreRH" id="positivo" value="Positivo" [(ngModel)]="patient.datiMedico.fattoreRH">
+                                    <label class="form-check-label" for="flexRadioDefault1">
+                                    Positivo
+                                    </label>
+                                </div>
+                                <div class="form-check">
+                                    <input class="form-check-input" type="radio" name="fattoreRH" id="negativo" value="Negativo" [(ngModel)]="patient.datiMedico.fattoreRH">
+                                    <label class="form-check-label" for="flexRadioDefault2">
+                                    Negativo
+                                    </label>
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="row vertical-padding10">
+                            <div class="col-md-1"></div>
+                            <div class="form-group col-md-5">
+                                <label>Codice ATS</label>
+                                <input [(ngModel)]="patient.datiMedico.codiceATS" name="codiceAts" type="text" class="form-control" id="codiceAts">
+                            </div>
+                        </div>
+
+
+                        <div class="row vertical-padding15">
+                            <div class="col-md-1"></div>
+                            <div class="col-md-5 text-start">
+                                <button type="button" (click)="changeSectionBack()" class="btn btn-primary btn-lg">Indietro</button>
+                            </div>
+                            <div class="col-md-5 text-end">
+                                <button (click)="addNewPatient()" class="btn btn-primary btn-lg" [disabled]="sixthSectionForm.invalid">Registra Paziente</button>
+                            </div>
+                        </div>
+                        <div class="row vertical-padding15">
+                            <div id="patientAdded" [ngClass]="{'non-display-section' : !patientAdded }">
+                                <div class="container alert-success rounded-pill text-center">
+                                    <span class="vertical-padding2">Paziente aggiunto correttamente al Database!</span>
+                                </div>
+                            </div>
+                        </div>
+                    </form>
+                </div> 
+                <!--Close section-->
+                
+            </form>
+        </div>
+    </div>
+</div>
+

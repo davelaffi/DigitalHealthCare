@@ -1,0 +1,33 @@
+img:hover {
+    cursor: pointer;
+}
+
+.vertical-padding10{
+    margin-top: 1.0em; 
+    margin-bottom: 1.0em;
+}
+
+.vertical-padding15{
+    margin-top: 1.5em; 
+    margin-bottom: 1.5em;
+}
+
+.vertical-padding2{
+    margin-top: 2em;
+    margin-bottom: 2em;
+}
+
+.horizontal-padding10{
+    margin-right: 1.0em; 
+    margin-left: 1.0em;
+}
+
+.horizontal-padding15{
+    margin-right: 1.5em; 
+    margin-left: 1.5em;
+}
+
+.horizontal-padding2{
+    margin-right: 2em;
+    margin-left: 2em;
+}

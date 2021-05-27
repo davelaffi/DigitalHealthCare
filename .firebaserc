@@ -1,0 +1,14 @@
+{
+  "targets": {
+    "digital-healthcare-it": {
+      "hosting": {
+        "Tesi": [
+          "digital-healthcare-it"
+        ]
+      }
+    }
+  },
+  "projects": {
+    "default": "digital-healthcare-it"
+  }
+}

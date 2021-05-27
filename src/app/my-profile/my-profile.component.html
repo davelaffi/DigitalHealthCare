@@ -1,0 +1,59 @@
+<div class="container rounded bg-white mt-5 mb-5">
+    <div class="row">
+        
+        <div class="col-md-2">
+            <!--Se voglio mettere qualcosa nella parte sinistra-->
+        </div>
+
+        <div class="col-md-8">
+            <div class="col text-center vertical-padding2">
+                <h1>Gestione profilo personale</h1>
+            </div>
+        </div>
+
+        <div class="col-md-2">
+            <div class="col text-center vertical-padding2">
+                <a [routerLink]="['/home']" routerLinkActive="router-link-active">
+                    <img src="./assets/home_icon.jpg" alt="home" width="100" height="100">
+                </a>
+            </div>
+        </div>
+
+    </div>
+    <div class="row">
+        <div class="col-md-3 border-right vertical-padding10">
+            <div class="d-flex flex-column align-items-center text-center p-3 py-5">
+
+                <span class="font-weight-bold">{{ currentUser.nome }} {{ currentUser.cognome }}</span>
+                <span class="text-black-50">{{ currentUser.email }}</span>
+                
+                <img class="rounded-circle mt-2" width="150px" (click)="fileInput.click()" src={{currentUser.photoURL}}>
+                <img [src]="photoModified ? './assets/checked_icon.jpg' : './assets/upload_icon.png' " (click)="fileInput.click()" alt="" width="40" height="40">
+                
+                <input type="file" (change)="onFileChanged($event)" #fileInput>
+                
+            </div>
+        </div>
+        <div class="col-md-5 border-right">
+            <div class="p-3 py-5">
+                <div class="d-flex justify-content-between align-items-center mb-3">
+                    <h4 class="text-right">Dati personali</h4>
+                </div>
+                <div class="row mt-2">
+                    <div class="col-md-6 vertical-padding10"><label class="labels">Nome</label><input type="text" class="form-control" value="{{currentUser.nome}}" placeholder="first name" [(ngModel)]="currentUser.nome"></div>
+                    <div class="col-md-6 vertical-padding10"><label class="labels">Cognome</label><input type="text" class="form-control" value="{{currentUser.cognome}}" placeholder="surname" [(ngModel)]="currentUser.cognome"></div>
+                </div>
+                <div class="row mt-3">
+                    <div class="col-md-12 vertical-padding10"><label class="labels">Telefono</label><input type="text" class="form-control" placeholder="enter phone number" value="{{currentUser.telefono}}" [(ngModel)]="currentUser.telefono"></div>
+                    <div class="col-md-12 vertical-padding10"><label class="labels">PEC</label><input type="text" class="form-control" placeholder="enter address line 1" value="{{currentUser.pec}}" [(ngModel)]="currentUser.pec"></div>   
+                </div>
+                <div class="mt-5 text-center"><button class="btn btn-primary profile-button" type="button" (click)="registerChanges()">Save Profile</button></div>
+            </div>
+        </div>
+        <div class="col-md-4">
+            <div class="p-3 py-5">
+                <div class="col-md-12"><label class="labels">Giorni e orari di lavoro</label><input type="date" class="form-control" placeholder="enter address line 2" value=""></div>
+            </div>
+        </div>
+    </div>
+</div>

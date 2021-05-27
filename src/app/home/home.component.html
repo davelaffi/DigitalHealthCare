@@ -1,0 +1,116 @@
+<div class="fluid-container text-center">
+
+    <div class="row vertical-padding10">
+        <ng-template #modalData let-modal>
+            <div class="modal-header">
+                <h4 class="modal-title text-center" id="modal-basic-title">Inserisci Codice Fiscale</h4>
+                <button type="button" class="close" aria-label="Close" (click)="modal.dismiss('Cross click')">
+                <span aria-hidden="true">×</span>
+                </button>
+            </div>
+            <div class="modal-body">
+                <p>Se il paziente è già presente nel sistema potrà scegliere di modificare i dati, altrimenti inserirà da zero un nuovo paziente</p>
+                <input type="text" id="CF" placeholder="Codice Fiscale" [(ngModel)]="cfNuovoPaziente">
+
+                <div id="presentCF" [ngClass]="{'non-display-section' : cfAlreadyInDB != true }">
+                    <a [routerLink]='"."' class="d-flex justify-content-between align-items-center" (click)="addNewDatePatient()">
+                        <div>{{lastUpdateTS | date:'dd/MM/yyyy'}}</div>
+                    </a>
+                </div>
+            </div>
+            <div class="modal-footer">
+                <div class="row">
+                    <div [ngClass]="{'non-display-section' : !cfAlreadyInDB }">
+                        <button type="button" class="btn btn-primary" (click)="addNewPatientFromScratch()">Aggiungi da zero</button>
+                    </div>
+                    <div [ngClass]="{'non-display-section' : cfAlreadyInDB}">
+                        <button type="button" class="btn btn-primary" (click)="checkCF()">Inserisci</button>
+                    </div>
+                </div>
+            </div>
+        </ng-template>
+
+        <div class="col-md-2"></div>
+        <div class="col-md-8">
+            <div class="row vertical-padding10">
+                <div>
+                    <h1>Benvenuto {{ currentUser.nome }} {{ currentUser.cognome }}</h1>
+                </div>
+                <div>
+                    <img class="rounded-circle" src={{currentUser.photoURL}} alt="" width="100" height="100">
+                </div>
+            </div>
+        </div>
+        <div class="col-md-2 vertical-padding10">
+            <a href='#' (click)="logout()" routerLinkActive="router-link-active" (click)="db.cancelSubscriptions(mySubs)">
+                <img src="./assets/logout_icona.jpg" alt="" width="100" height="100">
+            </a>
+        </div>
+    </div>
+
+    <hr>
+
+    <div class="row text-center">
+
+       
+        <!-- Patients list -->
+        <div class="col-md-6">
+            <div class="vertical-padding10">
+                <a [routerLink]="['/listPatient']" routerLinkActive="router-link-active" (click)="db.cancelSubscriptions(mySubs)">
+                    <img class="rounded-circle" src="./assets/listaPazienti_icon.jpg" alt="" width="250" height="250">
+                </a>
+            </div>
+            <div class="vertical-padding10">
+                <a [routerLink]="['/listPatient']" routerLinkActive="router-link-active">
+                    <button class="btn btn-primary">Lista dei pazienti</button>
+                </a>
+            </div>
+        </div> 
+
+         <!-- New Patient -->
+         <div class="col-md-6">
+            <div class="vertical-padding10">
+                <a [routerLink]="['/newPatient']" routerLinkActive="router-link-active">
+                    <img class="rounded-circle" src="./assets/aggiungiPaziente_icon.jpg" alt="" width="250" height="250">
+                </a>
+            </div>
+            <div class="vertical-padding10">
+                <a [routerLink]="['/newPatient']" routerLinkActive="router-link-active"></a>
+                <button class="btn btn-primary" (click)="triggerModal(modalData)">Aggiungi nuovo Paziente</button>
+            </div>
+        </div> 
+
+    </div>
+
+    <div class="row text-center vertical-padding10">
+
+        <!-- Covid 19 emergency -->
+        <div class="col-md-6">
+            <div class="vertical-padding10">
+                <a [routerLink]="['/emergenzaCovid']" routerLinkActive="router-link-active" (click)="db.cancelSubscriptions(mySubs)">
+                    <img class="rounded-circle" src="./assets/covid19_icon.jpg" alt="" width="250" height="250">
+                </a>
+            </div>
+            <div class="vertical-padding10">
+                <a [routerLink]="['/emergenzaCovid']" routerLinkActive="router-link-active">
+                    <button class="btn btn-primary">Vaccinazioni e Green pass</button>
+                </a>
+            </div>
+        </div> 
+
+        <!-- Profilo Personale -->
+        <div class="col-md-6">
+            <div class="vertical-padding10">
+                <a [routerLink]="['/myProfile']" routerLinkActive="router-link-active" (click)="db.cancelSubscriptions(mySubs)">
+                    <img class="rounded-circle" src="./assets/impostazioni_icon.jpg" alt="" width="250" height="250">
+                </a>
+            </div>
+            <div class="vertical-padding10">
+                <a [routerLink]="['/myProfile']" routerLinkActive="router-link-active">
+                    <button class="btn btn-primary">Gestione Profilo</button>
+                </a>
+            </div>
+        </div> 
+    </div>
+
+</div>

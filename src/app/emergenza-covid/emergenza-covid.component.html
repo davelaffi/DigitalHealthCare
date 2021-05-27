@@ -1,0 +1,198 @@
+<!--Lista iniziale-->
+
+<div class="row">
+
+    <div class="col-md-2">
+        <!--Se voglio mettere qualcosa nella parte sinistra-->
+    </div>
+
+    <div class="col-md-8">
+        <div class="col text-center vertical-padding2">
+            <h2>Covid-19: Vaccinazioni, Green pass e test</h2>
+        </div>
+    </div>
+
+    <div class="col-md-2">
+        <div class="col text-center vertical-padding2">
+            <a [routerLink]="['/home']" routerLinkActive="router-link-active" (click)="db.cancelSubscriptions(mySubs)">
+                <img src="./assets/home_icon.jpg" alt="home" width="100" height="100">
+            </a>
+        </div>
+    </div>
+
+</div>
+<div id="listPatient" [ngClass]="{'non-display-section' : !visualizeList }">
+    <div class="form-group vertical-padding1 row">
+        <div class="col md-4"></div>
+        <div class="col-md-4 text-center">
+            <label for="search-text">Cerca Paziente...</label>
+            <input type="text" class="form-control" id="search-text" aria-describedby="search-text"
+                [(ngModel)]="searchText" placeholder="Enter text to search" autofocus>
+        </div>
+        <div class="col-md-4"></div>
+    </div>
+
+
+    <div class="container-fluid">
+        <div class="list-group">
+            <a [routerLink]="['.']" routerLinkActive="router-link-active" (click)="selectedPatient(patient.CF)"
+                class="list-group-item list-group-item-action d-flex justify-content-between align-items-center"
+                *ngFor='let patient of myArray | appFilter: searchText'>
+                <div>
+                    <h3>{{patient.nome}} {{patient.cognome}}</h3>
+                    <p>{{patient.CF}}</p>
+                </div>
+                <img src="{{patient.photoURL}}" alt="{{patient.nome}}" width="100" height="100">
+            </a>
+        </div>
+    </div>
+
+</div>
+
+<div [ngClass]="{'non-display-section' : visualizeList }">
+
+    <div class="row text-center vertical-padding2">
+        <div class="col-md-2"></div>
+        <div class="col-md-8">
+            <div>
+                <img src="./assets/clinic_record.png" width="70" height="70">
+            </div>
+            <div>
+                <button class="modified-button vertical-padding2">Aggiungi nuovo referto</button>
+            </div>
+        </div>
+    </div>
+    <div class="row text-center verticla-padding2">
+        <div class="col">
+            <div class="our_solution_category">
+                <div class="solution_cards_box">
+                    <div class="solution_card">
+                        <div class="hover_color_bubble"></div>
+                        <div class="so_top_icon">
+                            <img src="./assets/tampone.svg" alt="My Happy SVG" />
+                        </div>
+                        <div class="solu_title">
+                            <h3>Tampone Covid-19</h3>
+                        </div>
+                        <div class="solu_description">
+                            <button type="button" class="read_more_btn" (click)="changeSectionGo(1, tampone)">Vai alla
+                                lista</button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="col">
+            <div class="our_solution_category">
+                <div class="solution_cards_box">
+                    <div class="solution_card">
+                        <div class="hover_color_bubble"></div>
+                        <div class="so_top_icon">
+                            <img src="./assets/covid.svg" alt="My Happy SVG" />
+                        </div>
+                        <div class="solu_title">
+                            <h3>Test Sierologico</h3>
+                        </div>
+                        <div class="solu_description">
+                            <button type="button" class="read_more_btn" (click)="changeSectionGo(2, siero)">Vai alla
+                                lista</button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="col">
+            <div class="our_solution_category">
+                <div class="solution_cards_box">
+                    <div class="solution_card">
+                        <div class="hover_color_bubble"></div>
+                        <div class="so_top_icon">
+                            <img src="./assets/vaccination.svg" alt="My Happy SVG" />
+                        </div>
+                        <div class="solu_title">
+                            <h3>Vaccinazioni Covid-19</h3>
+                        </div>
+                        <div class="solu_description">
+                            <button type="button" class="read_more_btn" (click)="changeSectionGo(3,vaccino)">Vai alla
+                                lista</button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+    </div>
+
+
+    <hr>
+    <!-- <div class="container-sm" style="max-inline-size: 40%;"> -->
+    <div class="container" id="patientSection">
+
+        <div class="row" [ngClass]="{'non-display-section' : controllerSection != 1 }">
+            <div class="col-md-2"></div>
+            <div class="col-md-8" #tampone>
+                <div class="card vertical-padding10"  *ngFor='let rep of report | tipologiaFilter:tipologia'>
+                    <div class="card-header">
+                        <div class="row">
+                            <div class="col">
+                                {{rep.data}}
+                            </div>
+                            <div class="col text-end">
+                                <img src="./assets/tampone.svg" alt="My Happy SVG" widht="40" height="40" />
+                            </div>
+                        </div>
+                    </div>
+                    <div class="card-body">
+                        <h5 class="card-title">{{rep.tipologia}}</h5>
+                        <p class="card-text">Esito: {{rep.esito}}</p>
+                        <button type="button" class="modified-button">Apri Referto</button>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="row" [ngClass]="{'non-display-section' : controllerSection != 2 }">
+            <div class="col-md-2"></div>
+            <div class="col-md-8" #siero>
+                <div class="card vertical-padding10"  *ngFor='let rep of report | tipologiaFilter:tipologia'>
+                    <div class="card-header">
+                        <div class="row">
+                            <div class="col">
+                                {{rep.data}}
+                            </div>
+                            <div class="col text-end">
+                                <img src="./assets/covid.svg" alt="My Happy SVG" widht="40" height="40" />
+                            </div>
+                        </div>
+                    </div>
+                    <div class="card-body">
+                        <h5 class="card-title">{{rep.tipologia}}</h5>
+                        <p class="card-text">Esito: {{rep.esito}}</p>
+                        <button type="button" class="modified-button">Apri Referto</button>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="row" [ngClass]="{'non-display-section' : controllerSection != 3 }">
+            <div class="col-md-2"></div>
+            <div class="col-md-8" #vaccino>
+                <div class="card vertical-padding10"  *ngFor='let rep of report | tipologiaFilter:tipologia'>
+                    <div class="card-header">
+                        <div class="row">
+                            <div class="col">
+                                {{rep.data}}
+                            </div>
+                            <div class="col text-end">
+                                <img src="./assets/vaccination.svg" alt="My Happy SVG" widht="40" height="40" />
+                            </div>
+                        </div>
+                    </div>
+                    <div class="card-body">
+                        <h5 class="card-title">{{rep.tipologia}}, Somministrazione: {{rep.nomeVaccino}}</h5>
+                        <p class="card-text">Dose: {{rep.esito}}</p>
+                        <button type="button" class="modified-button">Apri Referto</button>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

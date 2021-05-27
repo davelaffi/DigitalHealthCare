@@ -1,0 +1,11 @@
+<div class="verifyMail-form">
+    <form>
+        <h2>Fatto!</h2>
+        <p class="hint-text">Grazie per esserti registrato</p>
+        <p class="hint-text">Abbiamo inviato una mail di verifica all'indirizzo: {{currentUser.email}}</p>
+        <div class="form-group text-center">
+          <button type="button" class="btn btn-primary btn-lg" (click)="sendVerificationAgain()">Invia di nuovo</button>
+        </div>
+        <div class="text-center">Torna al <a style="color : #007bff;" href="/signIn">Login</a></div>
+    </form>
+</div>

@@ -1,0 +1,71 @@
+export class medicoData{
+
+    public codiceEsenzione: string;
+    public retiPatologieAssistito: string;
+    public capacitaMotoriaAssistito: string;
+    public attivitaLavorativa: string;
+    public patologieCronicheRilevanti: string[];
+    public organiMancanti: string;
+    public trapianti: string;
+    public rilevantiMalformazioni: string;
+    public reazioniAvverseFarmaciAlimenti: string;
+    public allergieCutaneeRespiratorieSistemiche: string;
+    public allergieVelenoImenotteri: string;
+    public protesi: string;
+    public ausili: string;
+    public terapieFarmacologicheCroniche: string;
+    public anamnesiFamigliari: string;
+    public fattoriRischio: string;
+    public terapieFarmacologiche: string;
+    public vaccinazioni: string;
+    public contattoCareGiver: string;
+    public telefonoCareGiver: string;
+    public donazioneOrgani: string;
+    public patologieInAtto: string[];
+    public gravidanzeParti: string;
+    public altezza: string;
+    public peso: string;
+    public pressioneArteriosa: string;
+    public BMI: string;
+    public ADI: string;
+    public ADP: string;
+    public gruppoSanguigno: string;
+    public fattoreRH: string;
+    public codiceATS: string;
+
+
+    constructor(){
+        this.codiceEsenzione = "";
+        this.retiPatologieAssistito = "";
+        this.capacitaMotoriaAssistito = "";
+        this.attivitaLavorativa = "";
+        this.patologieCronicheRilevanti = [];
+        this.organiMancanti = "";
+        this.trapianti = "";
+        this.rilevantiMalformazioni = "";
+        this.reazioniAvverseFarmaciAlimenti = "";
+        this.allergieCutaneeRespiratorieSistemiche = "";
+        this.allergieVelenoImenotteri = "";
+        this.protesi = "";
+        this.ausili = "";
+        this.terapieFarmacologicheCroniche = "";
+        this.anamnesiFamigliari = "";
+        this.fattoriRischio = "";
+        this.terapieFarmacologiche = "";
+        this.vaccinazioni = "";
+        this.contattoCareGiver = "";
+        this.telefonoCareGiver = "";
+        this.donazioneOrgani = "";
+        this.patologieInAtto = [];
+        this.gravidanzeParti = "";
+        this.altezza = "";
+        this.peso = "";
+        this.pressioneArteriosa = "";
+        this.BMI = "";
+        this.ADI = "";
+        this.ADP = "";
+        this.gruppoSanguigno = "";
+        this.fattoreRH = "";
+        this.codiceATS = "";
+    }
+}
