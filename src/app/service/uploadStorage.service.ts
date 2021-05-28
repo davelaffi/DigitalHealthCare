@@ -12,11 +12,17 @@ export class UploadService {
   file: File | undefined;
   url = '';
 
-  constructor(private storage: AngularFireStorage, 
-    public db : AngularFirestore) { }
+  constructor(
+    private storage: AngularFireStorage, 
+    public db : AngularFirestore
+    ) { }
 
   handleFiles(file : File) {
     this.file = file;
+  }
+
+  setBasePath(basePath : string){
+    this.basePath = basePath;
   }
 
   //method to upload file at firebase storage

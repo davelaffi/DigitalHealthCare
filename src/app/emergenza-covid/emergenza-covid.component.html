@@ -8,7 +8,7 @@
 
     <div class="col-md-8">
         <div class="col text-center vertical-padding2">
-            <h2>Covid-19: Vaccinazioni, Green pass e test</h2>
+            <h2>Sezione Covid-19</h2> <img src="./assets/covid.svg" alt="home" width="30" height="30">
         </div>
     </div>
 
@@ -49,6 +49,79 @@
 
 </div>
 
+<!--Patient Section-->
+<div class="row vertical-padding10">
+    <ng-template #modalData let-modal>
+
+        <div class="modal-header">
+            <h4 class="modal-title text-center" id="modal-basic-title">Aggiungere referto</h4>
+            <button type="button" class="close" aria-label="Close" (click)="closeAll()">
+                <span aria-hidden="true">×</span>
+            </button>
+        </div>
+        <form name="reportForm" id="reportForm" ngNativeValidate #reportForm="ngForm">
+            <div class="modal-body">
+                <div class="col-sm-9 text-secondary">
+                    <label for="tipologia">Tipologia Referto: </label>
+                    <select [(ngModel)]="reportToAdd.tipologia" name="tipologia" class="form-control" id="tipologia"
+                        #tipologia required>
+                        <option id="tampone" name="tampone" value="Tampone">Tampone</option>
+                        <option id="sierologico" name="sierologico" value="Sierologico">Sierologico</option>
+                        <option id="vaccinazione" name="vaccinazione" value="Vaccinazione">Vaccinazione</option>
+                    </select>
+                </div>
+                <div class="col-sm-9 text-secondary">
+                    <label for="reportDate">Data Referto: </label>
+                    <input type="date" [(ngModel)]="reportToAdd.data" id="reportDate" name="date" #date required>
+                </div>
+
+                <div class="col-sm-9 text-secondary"
+                    [ngClass]="{'non-display-section' : reportToAdd.tipologia == tipologie[2] }">
+                    <label for="reportDate">Esito: </label>
+                    <select [(ngModel)]="reportToAdd.esito" name="esito" class="form-control" id="esito">
+                        <option id="positivo" name="positivo" value="Positivo">Positivo</option>
+                        <option id="negativo" name="negativo" value="Negativo">Negativo</option>
+                    </select>
+                </div>
+
+                <div class="col-sm-9 text-secondary"
+                    [ngClass]="{'non-display-section' : reportToAdd.tipologia != tipologie[2] }">
+                    <label for="reportDate">Dose: </label>
+                    <select [(ngModel)]="reportToAdd.esito" name="dose" class="form-control" id="dose">
+                        <option id="primaDose" name="primaDose" value="Prima Dose">Prima Dose</option>
+                        <option id="richiamo" name="richiamo" value="Richiamo">Richiamo</option>
+                    </select>
+                </div>
+
+                <div class="col-sm-9 text-secondary"
+                    [ngClass]="{'non-display-section' : reportToAdd.tipologia != tipologie[2] }">
+                    <label for="reportDate">Nome Vaccino: </label>
+                    <select [(ngModel)]="reportToAdd.nomeVaccino" name="nomeVacc" class="form-control" id="nomeVacc">
+                        <option id="astrazeneca" name="astrazeneca" value="Astrazeneca">Astrazeneca</option>
+                        <option id="pfizer" name="pfizer" value="Pfizer">Pfizer</option>
+                        <option id="johnson" name="johnson" value="Johnson">Johnson</option>
+                        <option id="moderna" name="moderna" value="Moderna">Moderna</option>
+                    </select>
+                </div>
+                <div class="col-sm-9 text-secondary text-center">
+                    <img class="rounded-circle mt-2" width="150px" (click)="fileInput.click()" src="./assets/covid.svg"
+                        width="50" height="50">
+                    <img [src]="reportUploaded ? './assets/checked_icon.jpg' : './assets/upload_icon.png' "
+                        (click)="fileInput.click()" alt="" width="40" height="40">
+
+                    <input type="file" (change)="onFileChanged($event)" #fileInput required>
+                </div>
+            </div>
+            <div class="modal-footer">
+                <button class="modified-button" (click)="closeAll()">Azzera Campi</button>
+                <button class="modified-button" (click)="registerChanges()" [disabled]="reportForm.invalid || !reportUploaded">Aggiungi
+                    Referto</button>
+            </div>
+        </form>
+    </ng-template>
+
+</div>
+
 <div [ngClass]="{'non-display-section' : visualizeList }">
 
     <div class="row text-center vertical-padding2">
@@ -58,7 +131,8 @@
                 <img src="./assets/clinic_record.png" width="70" height="70">
             </div>
             <div>
-                <button class="modified-button vertical-padding2">Aggiungi nuovo referto</button>
+                <button class="modified-button vertical-padding2" (click)="triggerModal(modalData)">Aggiungi nuovo
+                    referto</button>
             </div>
         </div>
     </div>
@@ -131,7 +205,7 @@
         <div class="row" [ngClass]="{'non-display-section' : controllerSection != 1 }">
             <div class="col-md-2"></div>
             <div class="col-md-8" #tampone>
-                <div class="card vertical-padding10"  *ngFor='let rep of report | tipologiaFilter:tipologia'>
+                <div class="card vertical-padding10" *ngFor='let rep of report | tipologiaFilter:tipologia'>
                     <div class="card-header">
                         <div class="row">
                             <div class="col">
@@ -145,7 +219,7 @@
                     <div class="card-body">
                         <h5 class="card-title">{{rep.tipologia}}</h5>
                         <p class="card-text">Esito: {{rep.esito}}</p>
-                        <button type="button" class="modified-button">Apri Referto</button>
+                        <button type="button" class="modified-button" (click)="openDocument(rep.link)">Apri Referto</button>
                     </div>
                 </div>
             </div>
@@ -153,7 +227,7 @@
         <div class="row" [ngClass]="{'non-display-section' : controllerSection != 2 }">
             <div class="col-md-2"></div>
             <div class="col-md-8" #siero>
-                <div class="card vertical-padding10"  *ngFor='let rep of report | tipologiaFilter:tipologia'>
+                <div class="card vertical-padding10" *ngFor='let rep of report | tipologiaFilter:tipologia'>
                     <div class="card-header">
                         <div class="row">
                             <div class="col">
@@ -175,7 +249,7 @@
         <div class="row" [ngClass]="{'non-display-section' : controllerSection != 3 }">
             <div class="col-md-2"></div>
             <div class="col-md-8" #vaccino>
-                <div class="card vertical-padding10"  *ngFor='let rep of report | tipologiaFilter:tipologia'>
+                <div class="card vertical-padding10" *ngFor='let rep of report | tipologiaFilter:tipologia'>
                     <div class="card-header">
                         <div class="row">
                             <div class="col">

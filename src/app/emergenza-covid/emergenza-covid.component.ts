@@ -1,9 +1,12 @@
 import { Component, OnInit } from '@angular/core';
-import { AngularFirestore } from '@angular/fire/firestore';
+import { AngularFirestore, AngularFirestoreDocument } from '@angular/fire/firestore';
+import { NgbModal } from '@ng-bootstrap/ng-bootstrap';
 import { Subscription } from 'rxjs';
 import { CovidReport } from '../models/covid_report';
 import { Patient } from '../models/patient';
 import { DatabaseService } from '../service/database.service';
+import { UploadService } from '../service/uploadStorage.service';
+import { UploadServiceFile } from '../service/uploadStorageFile.service';
 
 @Component({
   selector: 'app-emergenza-covid',
@@ -14,7 +17,10 @@ export class EmergenzaCovidComponent implements OnInit {
 
   controllerSection = 0;
   visualizeList = true;
+  tipologie = ["Tampone", "Sierologico", "Vaccinazione"];
   tipologia = "";
+  reportUploaded = false;
+  reportAdded = false;
 
   tampone: any[] = [];
   sierologico: any[] = [];
@@ -22,6 +28,7 @@ export class EmergenzaCovidComponent implements OnInit {
 
   patient = new Patient;
   selectedCF = "";
+  reportToAdd = new CovidReport;
 
   //Where I put patients list
   myArray: any[] = [];
@@ -30,13 +37,17 @@ export class EmergenzaCovidComponent implements OnInit {
   report: CovidReport[] = [];
 
   mySubs: Subscription[] = [];
+  myArray1: any[] = [];
 
   searchText = "";
 
   constructor(
     private firestore: AngularFirestore,
-    public db: DatabaseService
-  ) { }
+    public db: DatabaseService,
+    private modalService: NgbModal,
+    private storage: UploadServiceFile,
+  ) {
+  }
 
   ngOnInit(): void {
     this.myArray = [];
@@ -50,14 +61,14 @@ export class EmergenzaCovidComponent implements OnInit {
 
   changeSectionGo(x: number, el: HTMLElement) {
     this.controllerSection = x;
-    
-    switch(x){
-      case 1 : {this.tipologia = "tampone"; break;}
-      case 2 : {this.tipologia = "sierologico"; break;}
-      case 3 : {this.tipologia = "vaccinazione"; break;}
-      default : {this.tipologia = "";}
+
+    switch (x) {
+      case 1: { this.tipologia = this.tipologie[0]; break; }
+      case 2: { this.tipologia = this.tipologie[1]; break; }
+      case 3: { this.tipologia = this.tipologie[2]; break; }
+      default: { this.tipologia = ""; }
     }
-  
+
     this.db.delay(100).then(res => { el.scrollIntoView(); });
 
   }
@@ -76,13 +87,45 @@ export class EmergenzaCovidComponent implements OnInit {
 
     let dataDoc = docRef.collection('covid19');
 
-      var sub1 = dataDoc.get().subscribe((querySnapshot) => {
-        querySnapshot.forEach((doc) => {
-          this.report.push(this.db.createReportFromSnapshot(doc.data()));
-        });
-        this.report = this.report.reverse();
-        this.mySubs.push(sub1);
+    var sub1 = dataDoc.valueChanges().subscribe((querySnapshot) => {
+      this.report = [];
+      querySnapshot.forEach((doc) => {
+        console.log(doc);
+        this.report.push(this.db.createReportFromSnapshot(doc));
+        
       });
+      this.report = this.report.sort((a,b) => a.data.localeCompare(b.data)).reverse();
+      this.mySubs.push(sub1);
+    });
+  }
+
+  triggerModal(content: any) {
+    this.modalService.open(content, { ariaLabelledBy: 'modal-basic-title' })
+  }
+
+  closeAll() {
+    this.reportToAdd = new CovidReport;
+    this.reportUploaded = false;
+    this.modalService.dismissAll('Cross click');
+  }
+
+
+  onFileChanged(event: any) {
+    this.storage.handleFiles(event.target.files[0]);
+    this.reportUploaded = true;
+  }
+
+  async registerChanges() {
+    const ts = Date.now().toString();
+    
+    await this.storage.uploadFile(this.patient.CF + "_report" + ts, this.patient.CF, ts, this.reportToAdd).then(res => {
+      this.reportAdded = true;
+      this.closeAll();
+    }).catch(error => { window.alert(error); console.log("Errore update"); });
+  }
+
+  openDocument(url: string){
+    window.open(url);
   }
 
 }
