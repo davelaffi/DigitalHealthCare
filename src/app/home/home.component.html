@@ -70,8 +70,8 @@
          <!-- New Patient -->
          <div class="col-md-6">
             <div class="vertical-padding10">
-                <a [routerLink]="['/newPatient']" routerLinkActive="router-link-active">
-                    <img class="rounded-circle" src="./assets/aggiungiPaziente_icon.jpg" alt="" width="250" height="250">
+                <a [routerLink]="" fragment="">
+                    <img class="rounded-circle" src="./assets/aggiungiPaziente_icon.jpg" alt="" width="250" height="250" (click)="triggerModal(modalData)">
                 </a>
             </div>
             <div class="vertical-padding10">

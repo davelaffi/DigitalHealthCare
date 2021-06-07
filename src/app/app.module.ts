@@ -23,6 +23,7 @@ import { AngularFireAuthModule } from '@angular/fire/auth';
 import { AngularFireStorageModule } from '@angular/fire/storage';
 import { EmergenzaCovidComponent } from './emergenza-covid/emergenza-covid.component';
 import { TipologiaFilter } from './pipes/tipologiaFilter';
+import { BsDatepickerModule } from 'ngx-bootstrap/datepicker';
 
 
 
@@ -52,6 +53,7 @@ import { TipologiaFilter } from './pipes/tipologiaFilter';
     NgbModule,
     AngularFireAuthModule,
     AngularFireStorageModule,
+    BsDatepickerModule.forRoot()
   ],
   providers: [AuthService],
   bootstrap: [AppComponent]
