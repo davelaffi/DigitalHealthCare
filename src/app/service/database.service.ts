@@ -29,7 +29,7 @@ export class DatabaseService {
     return resultPatient;
   }
 
-  createPatientFromSnapshot(patientFromArray : any, resultPatient : Patient){
+  createPatientFromSnapshotMedico(patientFromArray : any, resultPatient : Patient){
     
     //Dati personali
     resultPatient.CF = patientFromArray.CF
@@ -84,16 +84,107 @@ export class DatabaseService {
     return resultPatient;
   }
 
-
-  createArrayOfPatientsFromArray(patientArray: any[]){
-    var listPatients : Patient[] = [];
-
-    patientArray.forEach((element) => (
-      listPatients.push(this.createPatientFromSnapshot(element, new Patient))
-    ));
+  createPatientFromSnapshotVolunteer(patientFromArray : any, resultPatient : Patient){
     
-    return listPatients;
+    //Dati personali
+    resultPatient.CF = patientFromArray.CF
+    resultPatient.nome = patientFromArray.nome;
+    resultPatient.cognome = patientFromArray.cognome;
+    resultPatient.datiPersonali.sesso = patientFromArray.sesso;
+    resultPatient.datiPersonali.dataNascita = patientFromArray.dataNascita;
+    resultPatient.datiPersonali.comuneNascita = patientFromArray.comuneNascita;
+    resultPatient.datiPersonali.indirizzoDomicilio = patientFromArray.indirizzoDomicilio;
+    resultPatient.datiPersonali.CAP = patientFromArray.CAP;
+    resultPatient.datiPersonali.comuneDomicilio = patientFromArray.comuneDomicilio;
+    resultPatient.datiPersonali.telefono = patientFromArray.telefono;
+    resultPatient.datiPersonali.email = patientFromArray.email;
+    resultPatient.datiPersonali.pec = patientFromArray.pec;
+    resultPatient.datiPersonali.provinciaNascita = patientFromArray.provinciaNascita;
+    resultPatient.datiPersonali.provinciaDomicilio = patientFromArray.provinciaDomicilio;
+
+    //Dati Volontario
+    resultPatient.datiVolontario.numeroCartaIdentita = patientFromArray.numeroCartaIdentità;
+    resultPatient.datiVolontario.comuneRilascio = patientFromArray.comuneRilascio;
+    resultPatient.datiVolontario.dataScadenza = patientFromArray.dataScadenza;
+    resultPatient.datiVolontario.contatto1 = patientFromArray.contatto1;
+    resultPatient.datiVolontario.telefono1 = patientFromArray.telefono1;
+    resultPatient.datiVolontario.contatto2 = patientFromArray.contatto2;
+    resultPatient.datiVolontario.telefono2 = patientFromArray.telefono2;
+    resultPatient.datiVolontario.viveSolo = patientFromArray.viveSolo;
+    resultPatient.datiVolontario.areaUtenza = patientFromArray.areaUtenza;
+    resultPatient.datiVolontario.servizioAssociazione = patientFromArray.servizioAssociazione;
+
+
+    return resultPatient;
   }
+
+  createPatientFromSnapshot(patientFromArray : any, resultPatient : Patient){
+    
+    //Dati personali
+    resultPatient.CF = patientFromArray.CF
+    resultPatient.nome = patientFromArray.nome;
+    resultPatient.cognome = patientFromArray.cognome;
+    resultPatient.datiPersonali.sesso = patientFromArray.sesso;
+    resultPatient.datiPersonali.dataNascita = patientFromArray.dataNascita;
+    resultPatient.datiPersonali.comuneNascita = patientFromArray.comuneNascita;
+    resultPatient.datiPersonali.indirizzoDomicilio = patientFromArray.indirizzoDomicilio;
+    resultPatient.datiPersonali.CAP = patientFromArray.CAP;
+    resultPatient.datiPersonali.comuneDomicilio = patientFromArray.comuneDomicilio;
+    resultPatient.datiPersonali.telefono = patientFromArray.telefono;
+    resultPatient.datiPersonali.email = patientFromArray.email;
+    resultPatient.datiPersonali.pec = patientFromArray.pec;
+    resultPatient.datiPersonali.provinciaNascita = patientFromArray.provinciaNascita;
+    resultPatient.datiPersonali.provinciaDomicilio = patientFromArray.provinciaDomicilio;
+
+    //Dati Medico
+    resultPatient.datiMedico.codiceEsenzione = patientFromArray.codiceEsenzione;
+    resultPatient.datiMedico.retiPatologieAssistito = patientFromArray.retiPatologieAssistito;
+    resultPatient.datiMedico.capacitaMotoriaAssistito = patientFromArray.capacitaMotoriaAssistito;
+    resultPatient.datiMedico.attivitaLavorativa = patientFromArray.attivitaLavorativa;
+    resultPatient.datiMedico.patologieCronicheRilevanti = patientFromArray.patologieCronicheRilevanti;
+    resultPatient.datiMedico.organiMancanti = patientFromArray.organiMancanti;
+    resultPatient.datiMedico.trapianti = patientFromArray.trapianti;
+    resultPatient.datiMedico.rilevantiMalformazioni = patientFromArray.rilevantiMalformazioni;
+    resultPatient.datiMedico.reazioniAvverseFarmaciAlimenti = patientFromArray.reazioniAvverseFarmaciAlimenti;
+    resultPatient.datiMedico.allergieCutaneeRespiratorieSistemiche = patientFromArray.allergieCutaneeRespiratorieSistemiche;
+    resultPatient.datiMedico.allergieVelenoImenotteri = patientFromArray.allergieVelenoImenotteri;
+    resultPatient.datiMedico.protesi = patientFromArray.protesi;
+    resultPatient.datiMedico.ausili = patientFromArray.ausili;
+    resultPatient.datiMedico.terapieFarmacologicheCroniche = patientFromArray.terapieFarmacologicheCroniche;
+    resultPatient.datiMedico.anamnesiFamigliari = patientFromArray.anamnesiFamigliari;
+    resultPatient.datiMedico.fattoriRischio = patientFromArray.fattoriRischio;
+    resultPatient.datiMedico.terapieFarmacologiche = patientFromArray.terapieFarmacologiche;
+    resultPatient.datiMedico.vaccinazioni = patientFromArray.vaccinazioni;
+    resultPatient.datiMedico.contattoCareGiver = patientFromArray.contattoCareGiver;
+    resultPatient.datiMedico.telefonoCareGiver = patientFromArray.telefonoCareGiver;
+    resultPatient.datiMedico.donazioneOrgani = patientFromArray.donazioneOrgani;
+    resultPatient.datiMedico.patologieInAtto = patientFromArray.patologieInAtto;
+    resultPatient.datiMedico.gravidanzeParti = patientFromArray.gravidanzeParti;
+    resultPatient.datiMedico.altezza = patientFromArray.altezza;
+    resultPatient.datiMedico.peso = patientFromArray.peso;
+    resultPatient.datiMedico.pressioneArteriosa = patientFromArray.pressioneArteriosa;
+    resultPatient.datiMedico.BMI = patientFromArray.BMI;
+    resultPatient.datiMedico.ADI = patientFromArray.ADI;
+    resultPatient.datiMedico.ADP = patientFromArray.ADP;
+    resultPatient.datiMedico.gruppoSanguigno = patientFromArray.gruppoSanguigno;
+    resultPatient.datiMedico.fattoreRH = patientFromArray.fattoreRH;
+    resultPatient.datiMedico.codiceATS = patientFromArray.codiceATS;
+
+    //Dati Volontario
+    resultPatient.datiVolontario.numeroCartaIdentita = patientFromArray.numeroCartaIdentità;
+    resultPatient.datiVolontario.comuneRilascio = patientFromArray.comuneRilascio;
+    resultPatient.datiVolontario.dataScadenza = patientFromArray.dataScadenza;
+    resultPatient.datiVolontario.contatto1 = patientFromArray.contatto1;
+    resultPatient.datiVolontario.telefono1 = patientFromArray.telefono1;
+    resultPatient.datiVolontario.contatto2 = patientFromArray.contatto2;
+    resultPatient.datiVolontario.telefono2 = patientFromArray.telefono2;
+    resultPatient.datiVolontario.viveSolo = patientFromArray.viveSolo;
+    resultPatient.datiVolontario.areaUtenza = patientFromArray.areaUtenza;
+    resultPatient.datiVolontario.servizioAssociazione = patientFromArray.servizioAssociazione;
+
+    return resultPatient;
+  }
+
 
   createUserMedicoFromSnapshot(userSnapshot : any){
     var user = new MedicoProfile();

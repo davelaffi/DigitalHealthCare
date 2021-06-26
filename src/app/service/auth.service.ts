@@ -17,14 +17,35 @@ export class AuthService {
 
   async signin(email: string, password : string){
     await this.firebaseAuth.signInWithEmailAndPassword(email,password)
-    .then(res=>{
-      this.isLogged = true
+    .then(res => {
+      this.isLogged = true;
       console.log(res);
-      localStorage.setItem('user',JSON.stringify(res.user))
-      this.router.navigate(['home']);
+      localStorage.setItem('user',JSON.stringify(res.user));
+
+      this.db.collection('users').doc(res.user?.uid).get().subscribe(ss => {
+         
+      const userType = this.getUserTypeFromSnapshot(ss.exists ? ss.data() : undefined);
+
+      if(userType == "medico"){
+        console.log("Sei un medico vero?");
+        this.router.navigate(['home']);
+      }
+      else if(userType == "volunteer"){
+        console.log("Sei un volontario vero?");
+        this.router.navigate(['homeVolunteer']);
+      }
+      else{
+        console.log("Non sei autorizzato ad entrare");
+      }
+        
+      });
+
     }).catch((error) => {
       window.alert(error)
   })
+  }
+  getUserTypeFromSnapshot(userType : any){
+    return userType.userType;
   }
   
   async signup(userCreated : MedicoProfile | VolunteerProfile, password:string){

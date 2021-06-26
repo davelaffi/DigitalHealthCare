@@ -72,7 +72,7 @@ export class PatientProfileComponent implements OnInit {
     const docRef = this.firestore.collection('citizens').doc(this.CF).collection('data').doc(ts);
     const collectionInstance = docRef.valueChanges();
     collectionInstance.subscribe(ss => {
-      this.patient = this.db.createPatientFromSnapshot(ss, this.patient);
+      this.patient = this.db.createPatientFromSnapshotMedico(ss, this.patient);
     });
     this.lastChosenTS = ts;
   }
@@ -85,7 +85,7 @@ export class PatientProfileComponent implements OnInit {
     console.log(this.patient);
 
     this.firestore.collection('citizens').doc(this.patient.CF).collection('data').doc(this.lastChosenTS)
-      .set({
+      .update({
         //Dati personali
         CF: this.patient.CF,
         nome: this.patient.nome,

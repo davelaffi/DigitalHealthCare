@@ -24,6 +24,12 @@ import { AngularFireStorageModule } from '@angular/fire/storage';
 import { EmergenzaCovidComponent } from './emergenza-covid/emergenza-covid.component';
 import { TipologiaFilter } from './pipes/tipologiaFilter';
 import { BsDatepickerModule } from 'ngx-bootstrap/datepicker';
+import { HomeVolontarioComponent } from './home-volontario/home-volontario.component';
+import { MyProfileVolunteerComponent } from './my-profile-volunteer/my-profile-volunteer.component';
+import { EmergenzaCovidVolunteerComponent } from './emergenza-covid-volunteer/emergenza-covid-volunteer.component';
+import { ListPatientVolunteerComponent } from './list-patient-volunteer/list-patient-volunteer.component';
+import { PatientProfileVolunteerComponent } from './patient-profile-volunteer/patient-profile-volunteer.component';
+import { AddNewPatientVolunteerComponent } from './add-new-patient-volunteer/add-new-patient-volunteer.component';
 
 
 
@@ -42,7 +48,13 @@ import { BsDatepickerModule } from 'ngx-bootstrap/datepicker';
     SignInComponent,
     VerifyMailAddressComponent,
     ForgotPasswordComponent,
-    EmergenzaCovidComponent
+    EmergenzaCovidComponent,
+    HomeVolontarioComponent,
+    MyProfileVolunteerComponent,
+    EmergenzaCovidVolunteerComponent,
+    ListPatientVolunteerComponent,
+    PatientProfileVolunteerComponent,
+    AddNewPatientVolunteerComponent,
   ],
   imports: [
     BrowserModule,

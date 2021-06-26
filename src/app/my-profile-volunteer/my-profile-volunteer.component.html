@@ -13,7 +13,7 @@
 
         <div class="col-md-2">
             <div class="col text-center vertical-padding2">
-                <a [routerLink]="['/home']" routerLinkActive="router-link-active">
+                <a [routerLink]="['/homeVolunteer']" routerLinkActive="router-link-active">
                     <img src="./assets/home_icon.jpg" alt="home" width="100" height="100">
                 </a>
             </div>
@@ -30,7 +30,7 @@
                 <img class="rounded-circle mt-2" width="150px" (click)="fileInput.click()" src={{currentUser.photoURL}}>
                 <img [src]="photoModified ? './assets/checked_icon.jpg' : './assets/upload_icon.png' " (click)="fileInput.click()" alt="" width="40" height="40">
                 
-                <input class="non-display-section" type="file" (change)="onFileChanged($event)" #fileInput>
+                <input type="file" (change)="onFileChanged($event)" #fileInput>
                 
             </div>
         </div>

@@ -1,6 +1,6 @@
 export class volontarioData{
     
-    public numeroCartaIdentità : string;
+    public numeroCartaIdentita : string;
     public comuneRilascio : string;
     public dataScadenza : string;
     public contatto1 : string;
@@ -15,7 +15,7 @@ export class volontarioData{
 
 
     constructor(){
-        this.numeroCartaIdentità = "";
+        this.numeroCartaIdentita = "";
         this.comuneRilascio = "";
         this.dataScadenza = "";
         this.contatto1 = "";

@@ -10,6 +10,8 @@ export class FilterPipe implements PipeTransform {
    * @returns {any[]}
    */
   transform(items: any[], searchText: string): any[] {
+    
+    
     if (!items) {
       return [];
     }
@@ -19,9 +21,7 @@ export class FilterPipe implements PipeTransform {
     searchText = searchText.toLocaleLowerCase();
 
     return items.filter(it => {
-        console.log(it);
-        console.log(it.nome);
-        return (it.nome + " " + it.cognome).toLocaleLowerCase().includes(searchText);
+      return (it.nome + " " + it.cognome + " " + it.CF).toLocaleLowerCase().includes(searchText);
     });
   }
 }

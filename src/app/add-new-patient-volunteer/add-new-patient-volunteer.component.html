@@ -1,0 +1,171 @@
+<div class="container-fluid">
+    <div class="row">
+
+        <div class="col-md-2">
+            <!--Se voglio mettere qualcosa nella parte sinistra-->
+        </div>
+
+        <div class="col-md-8">
+            <div class="row">
+                <div class="text-center vertical-padding2">
+                    <h1>{{patientToAdd.nome}} {{patientToAdd.cognome}}</h1>
+                </div>
+            </div>
+            <div class="row">
+                <div class="text-center">
+                    <img src="{{patientToAdd.photoURL}}" (click)="fileInput.click()" alt="home" width="100" height="100">
+                    <img [src]="photoModified ? './assets/checked_icon.jpg' : './assets/upload_icon.png' " (click)="fileInput.click()" alt="" width="40" height="40">
+                
+                <input class="non-display-section" type="file" (change)="onFileChanged($event)" #fileInput>
+                </div>
+            </div>
+        </div>
+
+        <div class="col-md-2">
+            <div class="col text-center vertical-padding2">
+                <a [routerLink]="['/ListPatientVolunteer']" routerLinkActive="router-link-active">
+                    <img src="./assets/listaPazienti_icon.jpg" alt="home" width="100" height="100">
+                </a>
+                <a [routerLink]="['/homeVolunteer']" routerLinkActive="router-link-active">
+                    <img src="./assets/home_icon.jpg" alt="home" width="100" height="100">
+                </a>
+            </div>
+        </div>
+
+    </div>
+
+    <div class="row">
+        <div class="col-md-2"></div>
+        <div class="col-md-8">
+            <div class="col text-center">
+                <h6>Completa Dati</h6>
+            </div>
+
+            <div class="row vertical-padding10 ">
+                <div class="col-md-1"></div>
+                <div class="col-md-12">
+                    <hr>
+                </div>
+            </div>
+
+            <form ngNativeValidate #formNewCitizen>
+
+                <div id="firstSection" [ngClass]="{'non-display-section' : controllerSection != 1 }">
+                    
+                    <!--Carta d'identità-->
+                    <div class="row vertical-padding10 ">
+                        <h4>Carta d'identità</h4>
+                    </div>
+                    
+                    <div class="row vertical-padding10 ">
+                        <div class="col-md-1"></div>
+                        <div class="form-group col-md-5"> 
+                            <label for="numeroCarta">Numero Carta D'identità</label>
+                            <input [(ngModel)]="patientToAdd.datiVolontario.numeroCartaIdentita" name="numeroCarta" type="text" class="form-control" id="numeroCarta">
+                        </div>
+                        <div class="form-group col-md-5">
+                            <label for="comuneRilascio">Comune di Rilascio</label>
+                            <input [(ngModel)]="patientToAdd.datiVolontario.comuneRilascio" name="comuneRilascio" type="text" class="form-control" id="comuneRilascio">
+                        </div>
+                    </div>
+
+                    <div class="row vertical-padding10">
+                        <div class="col-md-1"></div>
+                        <div class="form-group col-md-5">
+                            <div class="it-datepicker-wrapper">
+                                <label>Data Scadenza</label>
+                                <input [(ngModel)]="patientToAdd.datiVolontario.dataScadenza" name="dataScadenza" type="date"  class="form-control it-date-datepicker" id="dataScadenza">
+                            </div>
+                        </div>
+                    </div>
+
+
+                    <!--Contatti di Emergenza-->
+                    <div class="row vertical-padding10 ">
+                        <h4>Contatti di emergenza</h4>
+                    </div>
+                    
+                    <div class="row vertical-padding10 ">
+                        <div class="col-md-1"></div>
+                        <div class="form-group col-md-5"> 
+                            <label for="contatto1">Nome contatto 1</label>
+                            <input [(ngModel)]="patientToAdd.datiVolontario.contatto1" name="contatto1" type="text" class="form-control" id="contatto1">
+                        </div>
+                        <div class="form-group col-md-5">
+                            <label for="telefono1">Numero di Telefono</label>
+                            <input [(ngModel)]="patientToAdd.datiVolontario.telefono1" name="telefono1" type="text" class="form-control" id="telefono1">
+                        </div>
+                    </div>
+
+                    <div class="row vertical-padding10 ">
+                        <div class="col-md-1"></div>
+                        <div class="form-group col-md-5"> 
+                            <label for="contatto2">Nome contatto 2</label>
+                            <input [(ngModel)]="patientToAdd.datiVolontario.contatto2" name="contatto2" type="text" class="form-control" id="contatto2">
+                        </div>
+                        <div class="form-group col-md-5">
+                            <label for="telefono2">Numero di Telefono</label>
+                            <input [(ngModel)]="patientToAdd.datiVolontario.telefono2" name="telefono2" type="text" class="form-control" id="telefono2">
+                        </div>
+                    </div>
+
+
+                    <!--Altre informazioni-->
+                    <div class="row vertical-padding10 ">
+                        <h4>Altre informazioni</h4>
+                    </div>
+                    
+                    <div class="row vertical-padding10 ">
+                        <div class="col-md-1"></div>
+                        <div class="col-md-5">
+                            <label for="viveSolo">Vive solo/a</label>
+                            <div class="form-check">
+                                <input class="form-check-input" type="radio" name="viveSolo" id="si" value="Si" [(ngModel)]="patientToAdd.datiVolontario.viveSolo">
+                                <label class="form-check-label" for="flexRadioDefault1">
+                                Si
+                                </label>
+                            </div>
+                            <div class="form-check">
+                                <input class="form-check-input" type="radio" name="viveSolo" id="no" value="No" [(ngModel)]="patientToAdd.datiVolontario.viveSolo">
+                                <label class="form-check-label" for="flexRadioDefault2">
+                                No
+                                </label>
+                            </div>
+                        </div>
+                        <div class="form-group col-md-5">
+                            <label for="areaUtenza">Area di Utenza</label>
+                            <input [(ngModel)]="patientToAdd.datiVolontario.areaUtenza" name="areaUtenza" type="text" class="form-control" id="areaUtenza">
+                        </div>
+                    </div>
+
+                    <div class="row vertical-padding10 ">
+                        <div class="col-md-1"></div>
+                        <div class="form-group col-md-5"> 
+                            <label for="servizioAssociazione">Servizio/Associazione</label>
+                            <input [(ngModel)]="patientToAdd.datiVolontario.servizioAssociazione" name="servizioAssociazione" type="text" class="form-control" id="servizioAssociazione">
+                        </div>
+                    </div>
+
+                </div>
+
+                <div class="row vertical-padding15">
+                    <div class="col-md-1"></div>
+                    <div class="col-md-5 text-end">
+                        <button (click)="addNewCitizen()" class="btn btn-primary btn-lg" [disabled]="formNewCitizen.invalid">Registra Dati Cittadino</button>
+                    </div>
+                </div>
+                <div class="row vertical-padding15">
+                    <div id="patientAdded" [ngClass]="{'non-display-section' : !patientAdded }">
+                        <div class="container alert-success rounded-pill text-center">
+                            <span class="vertical-padding2">Dati cittadino aggiornati correttamente</span>
+                        </div>
+                    </div>
+                </div>
+            </form>
+        </div>
+    </div>
+
+
+
+
+</div>

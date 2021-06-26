@@ -97,13 +97,10 @@ export class NewPatientComponent implements OnInit {
 
     //If you want it from scratch but already exists or if you want to start from a ts
     if(!this.isFirstTime){
-      console.log("CIAOOOO");
       const collectionRef = this.firestore.collection('citizens').doc(this.CFfromHome);
       const collectionInstance = collectionRef.valueChanges();
       var sub = collectionInstance.subscribe(ss => {
         this.patient = this.db.createGeneralPatientFromSnapshot(ss);
-        console.log("Paziente dopo this.isfirsttime");
-        console.log(this.patient);
         this.mySubs.push(sub);
         if(lastUserDate != null){
           this.lastUpdateTS = lastUserDate !== null ? JSON.parse(lastUserDate) : "";
@@ -133,7 +130,8 @@ export class NewPatientComponent implements OnInit {
         nome: "",
         cognome: "",
         photoURL: "https://firebasestorage.googleapis.com/v0/b/digital-healthcare-it.appspot.com/o/profile_image%2FUnknown_person.jpg?alt=media&token=0807cbb4-d08a-461d-9006-44530fede5b2",
-        CFMedico: this.medicoCF
+        CFMedico: this.medicoCF,
+        CFVolontario: "",
       }).catch((error) => {
         window.alert(error)
       });
@@ -196,7 +194,19 @@ export class NewPatientComponent implements OnInit {
         ADP : this.patient.datiMedico.ADP,
         gruppoSanguigno : this.patient.datiMedico.gruppoSanguigno,
         fattoreRH : this.patient.datiMedico.fattoreRH,
-        codiceATS : this.patient.datiMedico.codiceATS
+        codiceATS : this.patient.datiMedico.codiceATS,
+
+        //Dati inseriti dal volontario, inizializzazione
+        numeroCartaIdentità : this.patient.datiVolontario.numeroCartaIdentita,
+        comuneRilascio : this.patient.datiVolontario.comuneRilascio,
+        dataScadenza : this.patient.datiVolontario.dataScadenza,
+        contatto1 : this.patient.datiVolontario.contatto1,
+        telefono1 : this.patient.datiVolontario.telefono1,
+        contatto2 : this.patient.datiVolontario.contatto2,
+        telefono2 : this.patient.datiVolontario.telefono2,
+        viveSolo : this.patient.datiVolontario.viveSolo,
+        areaUtenza : this.patient.datiVolontario.areaUtenza,
+        servizioAssociazione : this.patient.datiVolontario.servizioAssociazione,
 
       }).then(async res => {
         

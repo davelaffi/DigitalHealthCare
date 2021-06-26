@@ -46,10 +46,13 @@ export class SignUpComponent implements OnInit {
 
    async onSignup(){
     
+    console.log("CIAOOOOOOOO");
+
     if(this.userType == "medico"){
       this.onSignupMedico();
     }
     else if(this.userType == "volunteer"){
+      console.log("Prova");
       this.onSignupVolunteer();
     }
   }
@@ -81,6 +84,12 @@ export class SignUpComponent implements OnInit {
   async onSignupVolunteer(){
     this.volunteerCreated = new VolunteerProfile();
     this.volunteerCreated.userType = "volunteer";
+    this.volunteerCreated.CF = this.CF;
+    this.volunteerCreated.cognome = this.cognome;
+    this.volunteerCreated.email = this.email;
+    this.volunteerCreated.nome = this.nome;
+    this.volunteerCreated.pec = this.pec;
+    this.volunteerCreated.telefono = this.telefono;
 
     try {
       await this.firebaseService.signup(this.volunteerCreated,this.password);

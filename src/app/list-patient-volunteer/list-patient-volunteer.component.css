@@ -1,0 +1,30 @@
+
+.vertical-padding10{
+    margin-top: 1.0em; 
+    margin-bottom: 1.0em;
+}
+
+.vertical-padding15{
+    margin-top: 1.5em; 
+    margin-bottom: 1.5em;
+}
+
+.vertical-padding2{
+    margin-top: 2em;
+    margin-bottom: 2em;
+}
+
+.non-display-section{
+    display: none; 
+    position: absolute; 
+    top: -9999px; 
+    left: -9999px;
+}
+
+.volunteer-assigned{
+    background-color: greenyellow;
+}
+
+.volunteer-not-assigned{
+    background-color: orange;
+}
