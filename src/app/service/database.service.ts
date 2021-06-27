@@ -25,6 +25,8 @@ export class DatabaseService {
 
     resultPatient.cognome = patientFromArray.cognome;
     resultPatient.photoURL = patientFromArray.photoURL;
+    resultPatient.medicoCF = patientFromArray.CFMedico;
+    resultPatient.volunteerCF = patientFromArray.CFVolontario;
 
     return resultPatient;
   }
@@ -79,7 +81,6 @@ export class DatabaseService {
     resultPatient.datiMedico.ADP = patientFromArray.ADP;
     resultPatient.datiMedico.gruppoSanguigno = patientFromArray.gruppoSanguigno;
     resultPatient.datiMedico.fattoreRH = patientFromArray.fattoreRH;
-    resultPatient.datiMedico.codiceATS = patientFromArray.codiceATS;
 
     return resultPatient;
   }
@@ -113,6 +114,8 @@ export class DatabaseService {
     resultPatient.datiVolontario.viveSolo = patientFromArray.viveSolo;
     resultPatient.datiVolontario.areaUtenza = patientFromArray.areaUtenza;
     resultPatient.datiVolontario.servizioAssociazione = patientFromArray.servizioAssociazione;
+    resultPatient.datiVolontario.codiceATS = patientFromArray.codiceATS;
+    resultPatient.datiVolontario.dataRilascio = patientFromArray.dataRilascio;
 
 
     return resultPatient;
@@ -168,7 +171,6 @@ export class DatabaseService {
     resultPatient.datiMedico.ADP = patientFromArray.ADP;
     resultPatient.datiMedico.gruppoSanguigno = patientFromArray.gruppoSanguigno;
     resultPatient.datiMedico.fattoreRH = patientFromArray.fattoreRH;
-    resultPatient.datiMedico.codiceATS = patientFromArray.codiceATS;
 
     //Dati Volontario
     resultPatient.datiVolontario.numeroCartaIdentita = patientFromArray.numeroCartaIdentità;
@@ -181,6 +183,8 @@ export class DatabaseService {
     resultPatient.datiVolontario.viveSolo = patientFromArray.viveSolo;
     resultPatient.datiVolontario.areaUtenza = patientFromArray.areaUtenza;
     resultPatient.datiVolontario.servizioAssociazione = patientFromArray.servizioAssociazione;
+    resultPatient.datiVolontario.codiceATS = patientFromArray.codiceATS;
+    resultPatient.datiVolontario.dataRilascio = patientFromArray.dataRilascio;
 
     return resultPatient;
   }

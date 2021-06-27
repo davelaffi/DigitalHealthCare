@@ -3,6 +3,7 @@ export class volontarioData{
     public numeroCartaIdentita : string;
     public comuneRilascio : string;
     public dataScadenza : string;
+    public dataRilascio : string;
     public contatto1 : string;
     public telefono1 : string;
     public contatto2 : string;
@@ -10,6 +11,8 @@ export class volontarioData{
     public viveSolo : string;
     public areaUtenza : string;
     public servizioAssociazione : string;
+    public codiceATS : string;
+    
     
 
 
@@ -25,5 +28,7 @@ export class volontarioData{
         this.viveSolo = "";
         this.areaUtenza = "";
         this.servizioAssociazione = "";
+        this.dataRilascio = "";
+        this.codiceATS = "";
     }
 }

@@ -134,7 +134,6 @@ export class PatientProfileComponent implements OnInit {
         ADP: this.patient.datiMedico.ADP,
         gruppoSanguigno: this.patient.datiMedico.gruppoSanguigno,
         fattoreRH: this.patient.datiMedico.fattoreRH,
-        codiceATS: this.patient.datiMedico.codiceATS
 
       }).then(async res => {
         console.log("Modifiche salvate");

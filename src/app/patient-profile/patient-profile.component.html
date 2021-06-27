@@ -324,7 +324,6 @@
                   </div>
 
                   <!--Card Stato corrente del paziente-->
-
                   <div class="card-body" [ngClass]="{'non-display-section' : controllerSection != 3 }">
                     <div class="row align-items-center">
                       <div class="col-md-3">
@@ -738,19 +737,6 @@
                           <option id="positivo" name="positivo" value="Positivo">Positivo</option>
                           <option id="negativo" name="negativo" value="Negativo">Negativo</option>
                         </select>
-                      </div>
-                    </div>
-                    <hr>
-                    <div class="row">
-                      <div class="col-sm-3">
-                        <h6 class="mb-0">Codice ATS</h6>
-                      </div>
-                      <div class="col-sm-9 text-secondary" [ngClass]="{'non-display-section' : editable }">
-                        {{patient.datiMedico.codiceATS}}
-                      </div>
-                      <div class="col-sm-9 text-secondary" [ngClass]="{'non-display-section' : !editable }">
-                        <input type="text" [(ngModel)]="patient.datiMedico.codiceATS" name="codiceATS"
-                          class="form-control" id="codiceATS" value="patient.datiMedico.codiceATS">
                       </div>
                     </div>
                   </div>

@@ -31,7 +31,6 @@ export class medicoData{
     public ADP: string;
     public gruppoSanguigno: string;
     public fattoreRH: string;
-    public codiceATS: string;
 
 
     constructor(){
@@ -66,6 +65,5 @@ export class medicoData{
         this.ADP = "";
         this.gruppoSanguigno = "";
         this.fattoreRH = "";
-        this.codiceATS = "";
     }
 }

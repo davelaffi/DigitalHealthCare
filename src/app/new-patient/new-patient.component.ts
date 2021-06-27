@@ -194,7 +194,6 @@ export class NewPatientComponent implements OnInit {
         ADP : this.patient.datiMedico.ADP,
         gruppoSanguigno : this.patient.datiMedico.gruppoSanguigno,
         fattoreRH : this.patient.datiMedico.fattoreRH,
-        codiceATS : this.patient.datiMedico.codiceATS,
 
         //Dati inseriti dal volontario, inizializzazione
         numeroCartaIdentità : this.patient.datiVolontario.numeroCartaIdentita,

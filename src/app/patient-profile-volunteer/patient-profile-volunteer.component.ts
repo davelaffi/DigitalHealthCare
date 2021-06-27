@@ -1,9 +1,11 @@
 import { Component, OnInit } from '@angular/core';
+import { AngularFireAuth } from '@angular/fire/auth';
 import { AngularFirestore } from '@angular/fire/firestore';
 import { ActivatedRoute, Router } from '@angular/router';
 import { Patient } from '../models/patient';
 import { DatabaseService } from '../service/database.service';
 import { UploadServiceCitizenPhoto } from '../service/uploadStorageCitizenPhoto.service';
+
 
 @Component({
   selector: 'app-patient-profile-volunteer',
@@ -30,6 +32,7 @@ export class PatientProfileVolunteerComponent implements OnInit {
     private db: DatabaseService,
     private storage: UploadServiceCitizenPhoto,
     public router: Router,
+    public firebaseAuth: AngularFireAuth,
   ) { 
   }
 
@@ -113,7 +116,9 @@ export class PatientProfileVolunteerComponent implements OnInit {
         telefono2 : this.patient.datiVolontario.telefono2,
         viveSolo : this.patient.datiVolontario.viveSolo,
         areaUtenza : this.patient.datiVolontario.areaUtenza,
-        servizioAssociazione : this.patient.datiVolontario.servizioAssociazione
+        servizioAssociazione : this.patient.datiVolontario.servizioAssociazione,
+        dataRilascio : this.patient.datiVolontario.dataRilascio,
+        codiceATS : this.patient.datiVolontario.codiceATS,
 
       }).then(async res => {
         console.log("Modifiche salvate");
@@ -130,4 +135,7 @@ export class PatientProfileVolunteerComponent implements OnInit {
     this.photoModified = true;
   }
 
+  resetProfile(){
+    this.firebaseAuth.sendPasswordResetEmail(this.patient.datiPersonali.email);
+  }
 }

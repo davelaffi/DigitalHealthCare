@@ -61,6 +61,15 @@
                         <div class="card-body">
                             <div class="row">
                                 <div class="col-sm-3">
+                                    <h6 class="mb-0">CF MMG di riferimento</h6>
+                                </div>
+                                <div class="col-sm-9 text-secondary">
+                                    {{patient.medicoCF}}
+                                </div>
+                            </div>
+                            <hr>
+                            <div class="row">
+                                <div class="col-sm-3">
                                     <h6 class="mb-0">Codice Fiscale</h6>
                                 </div>
                                 <div class="col-sm-9 text-secondary">
@@ -230,6 +239,22 @@
                                                     value="patient.datiVolontario.dataScadenza">
                                             </div>
                                         </div>
+                                        <hr>
+                                        <div class="row">
+                                            <div class="col-sm-3">
+                                                <h6 class="mb-0">Data Rilascio</h6>
+                                            </div>
+                                            <div class="col-sm-9 text-secondary"
+                                                [ngClass]="{'non-display-section' : editable }">
+                                                {{patient.datiVolontario.dataRilascio}}
+                                            </div>
+                                            <div class="col-sm-9 text-secondary"
+                                                [ngClass]="{'non-display-section' : !editable }">
+                                                <input type="text" [(ngModel)]="patient.datiVolontario.dataRilascio"
+                                                    name="dataRilascio" class="form-control" id="dataRilascio"
+                                                    value="patient.datiVolontario.dataRilascio">
+                                            </div>
+                                        </div>
                                     </div>
 
                                     <!--Card contatti di emergenza-->
@@ -267,10 +292,7 @@
                                                     value="patient.datiVolontario.telefono1">
                                             </div>
                                         </div>
-                                    </div>
-
-                                    <div class="card-body"
-                                        [ngClass]="{'non-display-section' : controllerSection != 2 }">
+                                        <hr>
                                         <div class="row">
                                             <div class="col-sm-3">
                                                 <h6 class="mb-0">Contatto 2</h6>
@@ -360,59 +382,20 @@
                                                     value="patient.datiVolontario.servizioAssociazione">
                                             </div>
                                         </div>
-                                    </div>
-
-                                    <!--Card Trapianti malformazioni-->
-
-                                    <div class="card-body"
-                                        [ngClass]="{'non-display-section' : controllerSection != 4 }">
-                                        <div class="row">
-                                            <div class="col-sm-3">
-                                                <h6 class="mb-0">Organi Mancanti</h6>
-                                            </div>
-                                            <div class="col-sm-9 text-secondary"
-                                                [ngClass]="{'non-display-section' : editable }">
-                                                {{patient.datiMedico.organiMancanti}}
-                                            </div>
-                                            <div class="col-sm-9 text-secondary"
-                                                [ngClass]="{'non-display-section' : !editable }">
-                                                <input type="text" [(ngModel)]="patient.datiMedico.organiMancanti"
-                                                    name="organiMancanti" class="form-control" id="organiMancanti"
-                                                    value="patient.datiMedico.organiMancanti">
-                                            </div>
-                                        </div>
                                         <hr>
                                         <div class="row">
                                             <div class="col-sm-3">
-                                                <h6 class="mb-0">Trapianti</h6>
+                                                <h6 class="mb-0">Codice ATS</h6>
                                             </div>
                                             <div class="col-sm-9 text-secondary"
                                                 [ngClass]="{'non-display-section' : editable }">
-                                                {{patient.datiMedico.trapianti}}
+                                                {{patient.datiVolontario.codiceATS}}
                                             </div>
                                             <div class="col-sm-9 text-secondary"
                                                 [ngClass]="{'non-display-section' : !editable }">
-                                                <input type="text" [(ngModel)]="patient.datiMedico.trapianti"
-                                                    name="trapianti" class="form-control" id="trapianti"
-                                                    value="patient.datiMedico.trapianti">
-                                            </div>
-                                        </div>
-                                        <hr>
-                                        <div class="row">
-                                            <div class="col-sm-3">
-                                                <h6 class="mb-0">Rilevanti Malformazioni</h6>
-                                            </div>
-                                            <div class="col-sm-9 text-secondary"
-                                                [ngClass]="{'non-display-section' : editable }">
-                                                {{patient.datiMedico.rilevantiMalformazioni}}
-                                            </div>
-                                            <div class="col-sm-9 text-secondary"
-                                                [ngClass]="{'non-display-section' : !editable }">
-                                                <input type="text"
-                                                    [(ngModel)]="patient.datiMedico.rilevantiMalformazioni"
-                                                    name="rilevantiMalformazioni" class="form-control"
-                                                    id="rilevantiMalformazioni"
-                                                    value="patient.datiMedico.rilevantiMalformazioni">
+                                                <input type="text" [(ngModel)]="patient.datiVolontario.codiceATS"
+                                                    name="codiceATS" class="form-control" id="codiceATS"
+                                                    value="patient.datiVolontario.codiceATS">
                                             </div>
                                         </div>
                                     </div>
@@ -427,6 +410,14 @@
                     <div class="vertical-padding1" [ngClass]="{'non-display-section' : !editable }">
                         <button type="button" class="btn btn-primary" (click)="modifyDataVolunteer()">Salva
                             Modifiche</button>
+                    </div>
+                </div>
+
+                <div class="row text-center">
+                    <div class="vertical-padding1">
+                        <button type="button" class="btn btn-primary" (click)="resetProfile()">
+                            Resetta profilo
+                        </button>
                     </div>
                 </div>
             </div>

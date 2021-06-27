@@ -1,4 +1,30 @@
 <div class="container-fluid">
+
+    <ng-template #modalData let-modal>
+        <div class="modal-header">
+            <h4 class="modal-title text-center" id="modal-basic-title">Creazione Account cittadino</h4>
+            <button type="button" class="close" aria-label="Close" (click)="modal.dismiss('Cross click')">
+                <span aria-hidden="true">×</span>
+            </button>
+        </div>
+        <div class="modal-body">
+            <div class="container-fluid">
+                <p>Inserisci la mail aggiornata del paziente, sarà l'username di accesso all'applicazione</p>
+                <input class="modal-input" type="email" id="email" placeholder="email" [(ngModel)]="email"
+                    (ngModelChange)="validateEmail()">
+            </div>
+        </div>
+        <div class="modal-footer">
+            <div class="row">
+                <div>
+                    <button type="button" class="btn btn-primary" [disabled]="!validEmail" (click)="addNewCitizen()">
+                        Registra nuovo Cittadino</button>
+                </div>
+            </div>
+        </div>
+    </ng-template>
+
+
     <div class="row">
 
         <div class="col-md-2">
@@ -13,10 +39,12 @@
             </div>
             <div class="row">
                 <div class="text-center">
-                    <img src="{{patientToAdd.photoURL}}" (click)="fileInput.click()" alt="home" width="100" height="100">
-                    <img [src]="photoModified ? './assets/checked_icon.jpg' : './assets/upload_icon.png' " (click)="fileInput.click()" alt="" width="40" height="40">
-                
-                <input class="non-display-section" type="file" (change)="onFileChanged($event)" #fileInput>
+                    <img src="{{patientToAdd.photoURL}}" (click)="fileInput.click()" alt="home" width="100"
+                        height="100">
+                    <img [src]="photoModified ? './assets/checked_icon.jpg' : './assets/upload_icon.png' "
+                        (click)="fileInput.click()" alt="" width="40" height="40">
+
+                    <input class="non-display-section" type="file" (change)="onFileChanged($event)" #fileInput>
                 </div>
             </div>
         </div>
@@ -24,10 +52,10 @@
         <div class="col-md-2">
             <div class="col text-center vertical-padding2">
                 <a [routerLink]="['/ListPatientVolunteer']" routerLinkActive="router-link-active">
-                    <img src="./assets/listaPazienti_icon.jpg" alt="home" width="100" height="100">
+                    <img src="./assets/listaPazienti_icon.jpg" alt="home" width="80" height="80">
                 </a>
                 <a [routerLink]="['/homeVolunteer']" routerLinkActive="router-link-active">
-                    <img src="./assets/home_icon.jpg" alt="home" width="100" height="100">
+                    <img src="./assets/home_icon.jpg" alt="home" width="80" height="80">
                 </a>
             </div>
         </div>
@@ -48,24 +76,28 @@
                 </div>
             </div>
 
-            <form ngNativeValidate #formNewCitizen>
+            <form ngNativeValidate #formNewCitizen="ngForm">
 
                 <div id="firstSection" [ngClass]="{'non-display-section' : controllerSection != 1 }">
-                    
+
+
                     <!--Carta d'identità-->
                     <div class="row vertical-padding10 ">
                         <h4>Carta d'identità</h4>
                     </div>
-                    
+
+
                     <div class="row vertical-padding10 ">
                         <div class="col-md-1"></div>
-                        <div class="form-group col-md-5"> 
-                            <label for="numeroCarta">Numero Carta D'identità</label>
-                            <input [(ngModel)]="patientToAdd.datiVolontario.numeroCartaIdentita" name="numeroCarta" type="text" class="form-control" id="numeroCarta">
+                        <div class="form-group col-md-5">
+                            <label for="numeroCarta">Numero Carta D'identità*</label>
+                            <input [(ngModel)]="patientToAdd.datiVolontario.numeroCartaIdentita" name="numeroCarta"
+                                type="text" class="form-control" id="numeroCarta" required>
                         </div>
                         <div class="form-group col-md-5">
-                            <label for="comuneRilascio">Comune di Rilascio</label>
-                            <input [(ngModel)]="patientToAdd.datiVolontario.comuneRilascio" name="comuneRilascio" type="text" class="form-control" id="comuneRilascio">
+                            <label for="comuneRilascio">Comune di Rilascio*</label>
+                            <input [(ngModel)]="patientToAdd.datiVolontario.comuneRilascio" name="comuneRilascio"
+                                type="text" class="form-control" id="comuneRilascio" required>
                         </div>
                     </div>
 
@@ -73,8 +105,28 @@
                         <div class="col-md-1"></div>
                         <div class="form-group col-md-5">
                             <div class="it-datepicker-wrapper">
-                                <label>Data Scadenza</label>
-                                <input [(ngModel)]="patientToAdd.datiVolontario.dataScadenza" name="dataScadenza" type="date"  class="form-control it-date-datepicker" id="dataScadenza">
+                                <label>Data Scadenza*</label>
+                                <div class="input-group">
+                                    <input class="form-control" placeholder="yyyy-mm-dd" name="dp" [(ngModel)]="dataScadenza" ngbDatepicker
+                                    (ngModelChange)="patientToAdd.datiVolontario.dataScadenza = dateFormat(dataScadenza)" #d="ngbDatepicker">
+                                    <div class="input-group-append">
+                                        <button class="btn btn-outline-secondary calendar" (click)="d.toggle()"
+                                         type="button"></button>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="form-group col-md-5">
+                            <div class="it-datepicker-wrapper">
+                                <label>Data Rilascio*</label>
+                                <div class="input-group">
+                                    <input class="form-control" placeholder="yyyy-mm-dd" name="dp" [(ngModel)]="dataRilascio" ngbDatepicker
+                                    (ngModelChange)="patientToAdd.datiVolontario.dataRilascio = dateFormat(dataRilascio)" #d2="ngbDatepicker">
+                                    <div class="input-group-append">
+                                        <button class="btn btn-outline-secondary calendar" (click)="d2.toggle()"
+                                         type="button"></button>
+                                    </div>
+                                </div>
                             </div>
                         </div>
                     </div>
@@ -84,28 +136,32 @@
                     <div class="row vertical-padding10 ">
                         <h4>Contatti di emergenza</h4>
                     </div>
-                    
+
                     <div class="row vertical-padding10 ">
                         <div class="col-md-1"></div>
-                        <div class="form-group col-md-5"> 
+                        <div class="form-group col-md-5">
                             <label for="contatto1">Nome contatto 1</label>
-                            <input [(ngModel)]="patientToAdd.datiVolontario.contatto1" name="contatto1" type="text" class="form-control" id="contatto1">
+                            <input [(ngModel)]="patientToAdd.datiVolontario.contatto1" name="contatto1" type="text"
+                                class="form-control" id="contatto1">
                         </div>
                         <div class="form-group col-md-5">
                             <label for="telefono1">Numero di Telefono</label>
-                            <input [(ngModel)]="patientToAdd.datiVolontario.telefono1" name="telefono1" type="text" class="form-control" id="telefono1">
+                            <input [(ngModel)]="patientToAdd.datiVolontario.telefono1" name="telefono1" type="text"
+                                class="form-control" id="telefono1">
                         </div>
                     </div>
 
                     <div class="row vertical-padding10 ">
                         <div class="col-md-1"></div>
-                        <div class="form-group col-md-5"> 
+                        <div class="form-group col-md-5">
                             <label for="contatto2">Nome contatto 2</label>
-                            <input [(ngModel)]="patientToAdd.datiVolontario.contatto2" name="contatto2" type="text" class="form-control" id="contatto2">
+                            <input [(ngModel)]="patientToAdd.datiVolontario.contatto2" name="contatto2" type="text"
+                                class="form-control" id="contatto2">
                         </div>
                         <div class="form-group col-md-5">
                             <label for="telefono2">Numero di Telefono</label>
-                            <input [(ngModel)]="patientToAdd.datiVolontario.telefono2" name="telefono2" type="text" class="form-control" id="telefono2">
+                            <input [(ngModel)]="patientToAdd.datiVolontario.telefono2" name="telefono2" type="text"
+                                class="form-control" id="telefono2">
                         </div>
                     </div>
 
@@ -114,44 +170,53 @@
                     <div class="row vertical-padding10 ">
                         <h4>Altre informazioni</h4>
                     </div>
-                    
+
                     <div class="row vertical-padding10 ">
                         <div class="col-md-1"></div>
                         <div class="col-md-5">
                             <label for="viveSolo">Vive solo/a</label>
                             <div class="form-check">
-                                <input class="form-check-input" type="radio" name="viveSolo" id="si" value="Si" [(ngModel)]="patientToAdd.datiVolontario.viveSolo">
+                                <input class="form-check-input" type="radio" name="viveSolo" id="si" value="Si"
+                                    [(ngModel)]="patientToAdd.datiVolontario.viveSolo">
                                 <label class="form-check-label" for="flexRadioDefault1">
-                                Si
+                                    Si
                                 </label>
                             </div>
                             <div class="form-check">
-                                <input class="form-check-input" type="radio" name="viveSolo" id="no" value="No" [(ngModel)]="patientToAdd.datiVolontario.viveSolo">
+                                <input class="form-check-input" type="radio" name="viveSolo" id="no" value="No"
+                                    [(ngModel)]="patientToAdd.datiVolontario.viveSolo">
                                 <label class="form-check-label" for="flexRadioDefault2">
-                                No
+                                    No
                                 </label>
                             </div>
                         </div>
                         <div class="form-group col-md-5">
                             <label for="areaUtenza">Area di Utenza</label>
-                            <input [(ngModel)]="patientToAdd.datiVolontario.areaUtenza" name="areaUtenza" type="text" class="form-control" id="areaUtenza">
+                            <input [(ngModel)]="patientToAdd.datiVolontario.areaUtenza" name="areaUtenza" type="text"
+                                class="form-control" id="areaUtenza">
                         </div>
                     </div>
 
                     <div class="row vertical-padding10 ">
                         <div class="col-md-1"></div>
-                        <div class="form-group col-md-5"> 
+                        <div class="form-group col-md-5">
                             <label for="servizioAssociazione">Servizio/Associazione</label>
-                            <input [(ngModel)]="patientToAdd.datiVolontario.servizioAssociazione" name="servizioAssociazione" type="text" class="form-control" id="servizioAssociazione">
+                            <input [(ngModel)]="patientToAdd.datiVolontario.servizioAssociazione"
+                                name="servizioAssociazione" type="text" class="form-control" id="servizioAssociazione">
+                        </div>
+                        <div class="form-group col-md-5">
+                            <label>Codice ATS</label>
+                            <input [(ngModel)]="patientToAdd.datiVolontario.codiceATS" name="codiceAts" type="text"
+                                class="form-control" id="codiceAts">
                         </div>
                     </div>
 
                 </div>
 
-                <div class="row vertical-padding15">
-                    <div class="col-md-1"></div>
-                    <div class="col-md-5 text-end">
-                        <button (click)="addNewCitizen()" class="btn btn-primary btn-lg" [disabled]="formNewCitizen.invalid">Registra Dati Cittadino</button>
+                <div class="row vertical-padding15 text-center">
+                    <div class="col">
+                        <button (click)="triggerModal(modalData)" class="btn btn-primary btn-lg"
+                            [disabled]="formNewCitizen.invalid">Registra Dati Cittadino</button>
                     </div>
                 </div>
                 <div class="row vertical-padding15">
