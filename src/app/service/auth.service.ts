@@ -95,6 +95,7 @@ export class AuthService {
         telefono: userCreated.telefono,
         pec: userCreated.pec,
         CF: userCreated.CF,
+        email: userCreated.email,
       });
     }
   }

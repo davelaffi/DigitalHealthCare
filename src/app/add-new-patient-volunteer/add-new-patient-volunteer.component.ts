@@ -1,12 +1,12 @@
 import { Component, OnInit } from '@angular/core';
 import { AngularFireAuth } from '@angular/fire/auth';
-import { AngularFirestore } from '@angular/fire/firestore';
+import { AngularFirestore, AngularFirestoreDocument } from '@angular/fire/firestore';
 import { Router } from '@angular/router';
 import { NgbModal } from '@ng-bootstrap/ng-bootstrap';
 import { Patient } from '../models/patient';
 import { DatabaseService } from '../service/database.service';
 import { UploadServiceCitizenPhoto } from '../service/uploadStorageCitizenPhoto.service';
-import {NgbDateStruct, NgbCalendar} from '@ng-bootstrap/ng-bootstrap';
+import { NgbDateStruct, NgbCalendar } from '@ng-bootstrap/ng-bootstrap';
 
 @Component({
   selector: 'app-add-new-patient-volunteer',
@@ -63,7 +63,7 @@ export class AddNewPatientVolunteerComponent implements OnInit {
     console.log(this.patientToAdd);
 
     //Set CFVolunteer
-    let generalDoc = this.firestore.collection('citizens').doc(this.patientToAdd.CF).update({
+    this.firestore.collection('citizens').doc(this.patientToAdd.CF).update({
       CFVolontario: this.CFVolunteer
     });
 
@@ -77,7 +77,7 @@ export class AddNewPatientVolunteerComponent implements OnInit {
         this.arrayDatePatient.push(doc.id);
       });
       this.arrayDatePatient = this.arrayDatePatient.reverse();
-      
+
       console.log(this.patientToAdd);
       console.log(this.email);
 
@@ -94,21 +94,32 @@ export class AddNewPatientVolunteerComponent implements OnInit {
         servizioAssociazione: this.patientToAdd.datiVolontario.servizioAssociazione,
         codiceATS: this.patientToAdd.datiVolontario.codiceATS,
         dataRilascio: this.patientToAdd.datiVolontario.dataRilascio,
-        email : this.email,
+        email: this.email,
       }).then(res => {
         var randomstring = Math.random().toString(36).slice(-8);
         this.firebaseAuth.createUserWithEmailAndPassword(this.email, randomstring).then(res => {
+          const userRef: AngularFirestoreDocument = this.firestore.collection('users').doc(res.user?.uid);
+
+          userRef.set({
+            email: res.user?.email,
+            uid: res.user?.uid,
+            photoURL: res.user?.photoURL != null ? res.user?.photoURL : "https://firebasestorage.googleapis.com/v0/b/digital-healthcare-it.appspot.com/o/profile_image%2FUnknown_person.jpg?alt=media&token=0807cbb4-d08a-461d-9006-44530fede5b2",
+            emailVerified: res.user?.emailVerified,
+            CF: this.patientToAdd.CF,
+            userType: "cittadino",
+          });
+
           this.firebaseAuth.sendPasswordResetEmail(this.email).then(res => {
             this.modalService.dismissAll();
             this.router.navigate(['/ListPatientVolunteer']);
           })
+            .catch((error) => {
+              window.alert(error)
+            });
+        })
           .catch((error) => {
             window.alert(error)
           });
-        })
-        .catch((error) => {
-          window.alert(error)
-        });
         console.log(randomstring);
       }).catch(error => window.alert(error));
     });
@@ -123,16 +134,16 @@ export class AddNewPatientVolunteerComponent implements OnInit {
     this.photoModified = true;
   }
 
-  triggerModal(content : any) {
-    this.modalService.open(content, {ariaLabelledBy: 'modal-basic-title'})
+  triggerModal(content: any) {
+    this.modalService.open(content, { ariaLabelledBy: 'modal-basic-title' })
   }
 
-  validateEmail(){
+  validateEmail() {
     let regexp = RegExp(/^(([^<>()\[\]\\.,;:\s@"]+(\.[^<>()\[\]\\.,;:\s@"]+)*)|(".+"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/);
     this.validEmail = regexp.test(this.email);
   }
 
-  dateFormat(date : NgbDateStruct ) : string{
+  dateFormat(date: NgbDateStruct): string {
     return date.year + '-' + date.month + '-' + date.day;
   }
 

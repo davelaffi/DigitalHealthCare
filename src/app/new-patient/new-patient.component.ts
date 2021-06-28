@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { AngularFirestore } from '@angular/fire/firestore';
 import { Router } from '@angular/router';
+import { NgbDateStruct } from '@ng-bootstrap/ng-bootstrap';
 import { Subscription } from 'rxjs';
 import { Patient } from '../models/patient';
 import { DatabaseService } from '../service/database.service';
@@ -21,6 +22,8 @@ export class NewPatientComponent implements OnInit {
   public patient : Patient;
   lastUpdateTS = 0;
   medicoCF = "";
+
+  dataNascita!: NgbDateStruct;
 
   mySubs : Subscription[] = [];
 
@@ -253,6 +256,10 @@ export class NewPatientComponent implements OnInit {
       array.push(value);
     }
     console.log(array);
+  }
+
+  dateFormat(date : NgbDateStruct ) : string{
+    return date.year + '-' + date.month + '-' + date.day;
   }
 
   

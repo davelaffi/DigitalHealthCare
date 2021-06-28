@@ -117,6 +117,21 @@
     font-size: 1rem;
     padding: 5px 16px;
   }
+
+  .modified-button-delete {
+    border: 0;
+    border-radius: 15px;
+    background: linear-gradient(
+      140deg,
+      #ca4242 0%,
+      #ca4242 50%,
+      #ca4242c7 75%
+    ) !important;
+    color: #fff;
+    font-weight: 500;
+    font-size: 1rem;
+    padding: 5px 16px;
+  }
   
   .our_solution_content h1 {
     text-transform: capitalize;

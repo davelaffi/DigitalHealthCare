@@ -41,6 +41,7 @@ export class UploadServiceFile {
   //method to retrieve download url
   private async getUrl(snap: firebase.storage.UploadTaskSnapshot, CF: string, dateTS: string, report : CovidReport) {
     const userRef: AngularFirestoreDocument = this.db.collection('citizens').doc(CF).collection('covid19').doc(dateTS);
+    report.ts = dateTS;
     const url = await snap.ref.getDownloadURL();
     this.url = url;  //store the URL
     userRef.set({
@@ -49,6 +50,7 @@ export class UploadServiceFile {
       tipologia: report.tipologia,
       nomeVaccino: report.nomeVaccino,
       data: report.data,
+      ts : report.ts,
     }).catch(error =>{window.alert(error); console.log("Errore set");});
   }
 }

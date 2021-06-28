@@ -284,6 +284,7 @@ export class DatabaseService {
     report.link = reportRaw.link;
     report.data = reportRaw.data;
     report.nomeVaccino = reportRaw.nomeVaccino;
+    report.ts = reportRaw.ts;
 
     return report;
   }

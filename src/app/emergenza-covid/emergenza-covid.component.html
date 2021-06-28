@@ -71,8 +71,17 @@
                     </select>
                 </div>
                 <div class="col-sm-9 text-secondary">
-                    <label for="reportDate">Data Referto: </label>
-                    <input type="date" [(ngModel)]="reportToAdd.data" id="reportDate" name="date" bsDatepicker #date required>
+                    <div class="it-datepicker-wrapper">
+                        <label>Data Referto</label>
+                        <div class="input-group">
+                            <input class="form-control" placeholder="yyyy-mm-dd" name="dp" [(ngModel)]="data"
+                                ngbDatepicker (ngModelChange)="reportToAdd.data = dateFormat(data)" #d2="ngbDatepicker">
+                            <div class="input-group-append">
+                                <button class="btn btn-outline-secondary calendar" (click)="d2.toggle()"
+                                    type="button"></button>
+                            </div>
+                        </div>
+                    </div>
                 </div>
 
                 <div class="col-sm-9 text-secondary"
@@ -114,7 +123,8 @@
             </div>
             <div class="modal-footer">
                 <button class="modified-button" (click)="closeAll()">Azzera Campi</button>
-                <button class="modified-button" (click)="registerChanges()" [disabled]="reportForm.invalid || !reportUploaded">Aggiungi
+                <button class="modified-button" (click)="registerChanges()"
+                    [disabled]="reportForm.invalid || !reportUploaded">Aggiungi
                     Referto</button>
             </div>
         </form>
@@ -219,7 +229,16 @@
                     <div class="card-body">
                         <h5 class="card-title">{{rep.tipologia}}</h5>
                         <p class="card-text">Esito: {{rep.esito}}</p>
-                        <button type="button" class="modified-button" (click)="openDocument(rep.link)">Apri Referto</button>
+                        <div class="row">
+                            <div class="col">
+                                <button type="button" class="modified-button" (click)="openDocument(rep.link)">Apri
+                                    Referto</button>
+                            </div>
+                            <div class="col text-end">
+                                <button type="button" class="modified-button-delete"
+                                    (click)="deleteReport(rep)">Cancella Referto</button>
+                            </div>
+                        </div>
                     </div>
                 </div>
             </div>
@@ -241,7 +260,16 @@
                     <div class="card-body">
                         <h5 class="card-title">{{rep.tipologia}}</h5>
                         <p class="card-text">Esito: {{rep.esito}}</p>
-                        <button type="button" class="modified-button">Apri Referto</button>
+                        <div class="row">
+                            <div class="col">
+                                <button type="button" class="modified-button" (click)="openDocument(rep.link)">Apri
+                                    Referto</button>
+                            </div>
+                            <div class="col text-end">
+                                <button type="button" class="modified-button-delete"
+                                    (click)="deleteReport(rep)">Cancella Referto</button>
+                            </div>
+                        </div>
                     </div>
                 </div>
             </div>
@@ -263,7 +291,16 @@
                     <div class="card-body">
                         <h5 class="card-title">{{rep.tipologia}}, Somministrazione: {{rep.nomeVaccino}}</h5>
                         <p class="card-text">Dose: {{rep.esito}}</p>
-                        <button type="button" class="modified-button">Apri Referto</button>
+                        <div class="row">
+                            <div class="col">
+                                <button type="button" class="modified-button" (click)="openDocument(rep.link)">Apri
+                                    Referto</button>
+                            </div>
+                            <div class="col text-end">
+                                <button type="button" class="modified-button-delete"
+                                    (click)="deleteReport(rep)">Cancella Referto</button>
+                            </div>
+                        </div>
                     </div>
                 </div>
             </div>

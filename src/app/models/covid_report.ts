@@ -5,6 +5,7 @@ export class CovidReport {
     public data : string;
     public nomeVaccino : string;
     public link : string;
+    public ts : string;
 
     constructor(){    
 
@@ -13,6 +14,7 @@ export class CovidReport {
     this.link = "";
     this.data = "";
     this.nomeVaccino = "";
+    this.ts = "";
     }
 
 } 

@@ -1,6 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { AngularFirestore, AngularFirestoreDocument } from '@angular/fire/firestore';
-import { NgbModal } from '@ng-bootstrap/ng-bootstrap';
+import { NgbDateStruct, NgbModal } from '@ng-bootstrap/ng-bootstrap';
 import { Subscription } from 'rxjs';
 import { CovidReport } from '../models/covid_report';
 import { Patient } from '../models/patient';
@@ -35,6 +35,8 @@ export class EmergenzaCovidComponent implements OnInit {
 
   //Array of reports
   report: CovidReport[] = [];
+
+  data!: NgbDateStruct;
 
   mySubs: Subscription[] = [];
   myArray1: any[] = [];
@@ -90,9 +92,7 @@ export class EmergenzaCovidComponent implements OnInit {
     var sub1 = dataDoc.valueChanges().subscribe((querySnapshot) => {
       this.report = [];
       querySnapshot.forEach((doc) => {
-        console.log(doc);
         this.report.push(this.db.createReportFromSnapshot(doc));
-        
       });
       this.report = this.report.sort((a,b) => a.data.localeCompare(b.data)).reverse();
       this.mySubs.push(sub1);
@@ -126,6 +126,16 @@ export class EmergenzaCovidComponent implements OnInit {
 
   openDocument(url: string){
     window.open(url);
+  }
+
+  dateFormat(date : NgbDateStruct ) : string{
+    return date.year + '-' + date.month + '-' + date.day;
+  }
+
+  deleteReport(selectedReport : CovidReport){
+    console.log(selectedReport);
+    this.firestore.collection('citizens').doc(this.selectedCF).collection('covid19').doc(selectedReport.ts).delete()
+    .catch(error => {window.alert(error)});
   }
 
 }
