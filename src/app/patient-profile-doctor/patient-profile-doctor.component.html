@@ -54,7 +54,7 @@
                     {{ageCalculator(patient.datiPersonali.dataNascita)}} anni</p>
                   <p class="text-muted font-size-sm">{{patient.datiPersonali.indirizzoDomicilio}},
                     {{patient.datiPersonali.comuneDomicilio}}, {{patient.datiPersonali.CAP}}</p>
-                  <button class="btn btn-primary" (click)="editable = !editable">Modifica Dati Paziente</button>
+                  <button class="btn btn-primary" [ngClass]="{'non-display-section' : patient.medicoCF != currentUser.CF }" (click)="editable = !editable">Modifica Dati Paziente</button>
                 </div>
               </div>
             </div>

@@ -51,7 +51,7 @@ export class SignUpComponent implements OnInit {
     if(this.userType == "medico"){
       this.onSignupMedico();
     }
-    else if(this.userType == "volunteer"){
+    else if(this.userType == "volontario"){
       console.log("Prova");
       this.onSignupVolunteer();
     }
@@ -83,7 +83,7 @@ export class SignUpComponent implements OnInit {
 
   async onSignupVolunteer(){
     this.volunteerCreated = new VolunteerProfile();
-    this.volunteerCreated.userType = "volunteer";
+    this.volunteerCreated.userType = "volontario";
     this.volunteerCreated.CF = this.CF;
     this.volunteerCreated.cognome = this.cognome;
     this.volunteerCreated.email = this.email;

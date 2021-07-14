@@ -2,20 +2,20 @@ import { NgModule } from '@angular/core';
 import { RouterModule, Routes } from '@angular/router';
 import { AddNewPatientVolunteerComponent } from './add-new-patient-volunteer/add-new-patient-volunteer.component';
 import { EmergenzaCovidVolunteerComponent } from './emergenza-covid-volunteer/emergenza-covid-volunteer.component';
-import { EmergenzaCovidComponent } from './emergenza-covid/emergenza-covid.component';
+import { EmergenzaCovidComponent } from './emergenza-covid-doctor/emergenza-covid-doctor.component';
 import { HomeVolontarioComponent } from './home-volontario/home-volontario.component';
-import { HomeComponent } from './home/home.component';
+import { HomeComponent } from './home-doctor/home-doctor.component';
 import { ListPatientVolunteerComponent } from './list-patient-volunteer/list-patient-volunteer.component';
-import { ListPatientsComponent } from './list-patient/list-patient.component';
+import { ListPatientsComponent } from './list-patient-doctor/list-patient-doctor.component';
 import { ForgotPasswordComponent } from './LoginAndRegistration/forgot-password/forgot-password.component';
 import { SignInComponent } from './LoginAndRegistration/sign-in/sign-in.component';
 import { SignUpComponent } from './LoginAndRegistration/sign-up/sign-up.component';
 import { VerifyMailAddressComponent } from './LoginAndRegistration/verify-mail-address/verify-mail-address.component';
 import { MyProfileVolunteerComponent } from './my-profile-volunteer/my-profile-volunteer.component';
-import { MyProfileComponent } from './my-profile/my-profile.component';
-import { NewPatientComponent } from './new-patient/new-patient.component';
+import { MyProfileComponent } from './my-profile-doctor/my-profile-doctor.component';
+import { NewPatientComponent } from './new-patient-doctor/new-patient-doctor.component';
 import { PatientProfileVolunteerComponent } from './patient-profile-volunteer/patient-profile-volunteer.component';
-import { PatientProfileComponent } from './patient-profile/patient-profile.component';
+import { PatientProfileComponent } from './patient-profile-doctor/patient-profile-doctor.component';
 import { AuthGuard } from './service/guard/auth.guard';
 
 const routes: Routes = [

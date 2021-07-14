@@ -9,9 +9,9 @@ import { DatePipe } from '@angular/common'
 import { Subscription } from 'rxjs';
 
 @Component({
-  selector: 'app-home',
-  templateUrl: './home.component.html',
-  styleUrls: ['./home.component.css']
+  selector: 'app-home-doctor',
+  templateUrl: './home-doctor.component.html',
+  styleUrls: ['./home-doctor.component.css']
 })
 export class HomeComponent implements OnInit {
 

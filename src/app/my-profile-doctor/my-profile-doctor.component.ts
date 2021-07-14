@@ -6,9 +6,9 @@ import { UploadService } from '../service/uploadStorage.service';
 
 
 @Component({
-  selector: 'app-my-profile',
-  templateUrl: './my-profile.component.html',
-  styleUrls: ['./my-profile.component.css']
+  selector: 'app-my-profile-doctor',
+  templateUrl: './my-profile-doctor.component.html',
+  styleUrls: ['./my-profile-doctor.component.css']
 })
 export class MyProfileComponent implements OnInit {
 

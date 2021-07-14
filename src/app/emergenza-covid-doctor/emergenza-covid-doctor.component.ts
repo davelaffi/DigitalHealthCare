@@ -9,9 +9,9 @@ import { UploadService } from '../service/uploadStorage.service';
 import { UploadServiceFile } from '../service/uploadStorageFile.service';
 
 @Component({
-  selector: 'app-emergenza-covid',
-  templateUrl: './emergenza-covid.component.html',
-  styleUrls: ['./emergenza-covid.component.css']
+  selector: 'app-emergenza-covid-doctor',
+  templateUrl: './emergenza-covid-doctor.component.html',
+  styleUrls: ['./emergenza-covid-doctor.component.css']
 })
 export class EmergenzaCovidComponent implements OnInit {
 

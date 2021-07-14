@@ -2,6 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { AngularFirestore } from '@angular/fire/firestore';
 import { Subscription } from 'rxjs';
 import { Patient } from '../models/patient';
+import { VolunteerProfile } from '../models/volunteer_profile';
 import { DatabaseService } from '../service/database.service';
 
 @Component({
@@ -17,12 +18,19 @@ export class ListPatientVolunteerComponent implements OnInit {
   searchText = "";
   patient = new Patient();
 
+  public currentUser = new VolunteerProfile();
+  showAllCitizens : boolean = false;
+
   constructor(
     private firestore: AngularFirestore,
     public db : DatabaseService
     ) { }
 
   ngOnInit(): void {
+
+    const userToConvert = localStorage.getItem('volontario');
+    this.currentUser = userToConvert !== null ? JSON.parse(userToConvert) : "";
+
     this.myArray = [];
     const collectionRef = this.firestore.collection('citizens');
     const collectionInstance = collectionRef.valueChanges();

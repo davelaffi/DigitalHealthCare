@@ -30,7 +30,7 @@ export class AuthService {
         console.log("Sei un medico vero?");
         this.router.navigate(['home']);
       }
-      else if(userType == "volunteer"){
+      else if(userType == "volontario"){
         console.log("Sei un volontario vero?");
         this.router.navigate(['homeVolunteer']);
       }
@@ -86,7 +86,7 @@ export class AuthService {
       });
     }
 
-    else if(userCreated.userType == "volunteer"){
+    else if(userCreated.userType == "volontario"){
       const medicoRef: AngularFirestoreDocument = this.db.collection('volunteers').doc(userCreated.CF);
 
       medicoRef.set({
@@ -130,7 +130,6 @@ async googleSignin() {
     localStorage.setItem('user',JSON.stringify(res.user))
       this.router.navigate(['home']);
   }).catch((error) => {
-    window.alert(error)
 });
   
 }

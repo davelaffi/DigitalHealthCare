@@ -1,14 +1,15 @@
 import { Component, OnInit } from '@angular/core';
 import { AngularFirestore } from '@angular/fire/firestore';
 import { ActivatedRoute, Router } from "@angular/router";
+import { MedicoProfile } from '../models/medico_profile';
 import { Patient } from '../models/patient';
 import { DatabaseService } from '../service/database.service';
 
 
 @Component({
-  selector: 'app-patient-profile',
-  templateUrl: './patient-profile.component.html',
-  styleUrls: ['./patient-profile.component.css']
+  selector: 'app-patient-profile-doctor',
+  templateUrl: './patient-profile-doctor.component.html',
+  styleUrls: ['./patient-profile-doctor.component.css']
 })
 export class PatientProfileComponent implements OnInit {
 
@@ -25,6 +26,8 @@ export class PatientProfileComponent implements OnInit {
   public isCollapsed3 = true;
   public isCollapsed4 = true;
 
+  public currentUser : MedicoProfile;
+
   editable = false;
   ispatient = false;
 
@@ -34,9 +37,14 @@ export class PatientProfileComponent implements OnInit {
     private db: DatabaseService,
     public router: Router,
   ) {
+    this.currentUser = new MedicoProfile();
   }
 
   ngOnInit() {
+
+    const userToConvert = localStorage.getItem('medico');
+    this.currentUser = userToConvert !== null ? JSON.parse(userToConvert) : "";
+
     this.CF = this.route.snapshot.paramMap.get("patientCF");
 
     const docRef = this.firestore.collection('citizens').doc(this.CF);

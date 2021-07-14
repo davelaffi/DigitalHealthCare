@@ -3,6 +3,7 @@ import { AngularFireAuth } from '@angular/fire/auth';
 import { AngularFirestore } from '@angular/fire/firestore';
 import { ActivatedRoute, Router } from '@angular/router';
 import { Patient } from '../models/patient';
+import { VolunteerProfile } from '../models/volunteer_profile';
 import { DatabaseService } from '../service/database.service';
 import { UploadServiceCitizenPhoto } from '../service/uploadStorageCitizenPhoto.service';
 
@@ -25,6 +26,7 @@ export class PatientProfileVolunteerComponent implements OnInit {
   controllerSection = 0;
 
   public isCollapsed1 = true;
+  public currentUser = new VolunteerProfile();
 
   constructor(
     private route: ActivatedRoute,
@@ -37,6 +39,10 @@ export class PatientProfileVolunteerComponent implements OnInit {
   }
 
   ngOnInit(): void {
+
+    const userToConvert = localStorage.getItem('volontario');
+    this.currentUser = userToConvert !== null ? JSON.parse(userToConvert) : "";
+
     this.CF = this.route.snapshot.paramMap.get("patientCF");
 
     const docRef = this.firestore.collection('citizens').doc(this.CF);
