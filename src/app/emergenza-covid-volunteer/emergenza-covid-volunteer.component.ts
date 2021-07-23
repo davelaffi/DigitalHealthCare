@@ -5,6 +5,7 @@ import { Subscription } from 'rxjs';
 import { collapseTextChangeRangesAcrossMultipleVersions } from 'typescript';
 import { CovidReport } from '../models/covid_report';
 import { Patient } from '../models/patient';
+import { VolunteerProfile } from '../models/volunteer_profile';
 import { DatabaseService } from '../service/database.service';
 
 @Component({
@@ -13,6 +14,9 @@ import { DatabaseService } from '../service/database.service';
   styleUrls: ['./emergenza-covid-volunteer.component.css']
 })
 export class EmergenzaCovidVolunteerComponent implements OnInit {
+
+  showAllPatients : boolean = false;
+  public currentUser = new VolunteerProfile();
 
   controllerSection = 0;
   visualizeList = true;
@@ -48,6 +52,10 @@ export class EmergenzaCovidVolunteerComponent implements OnInit {
   ) { }
 
   ngOnInit(): void {
+
+    const userToConvert = localStorage.getItem('volontario');
+    this.currentUser = userToConvert !== null ? JSON.parse(userToConvert) : "";
+
     this.myArray = [];
     const collectionRef = this.firestore.collection('citizens');
     const collectionInstance = collectionRef.valueChanges();

@@ -3,6 +3,7 @@ import { AngularFirestore, AngularFirestoreDocument } from '@angular/fire/firest
 import { NgbDateStruct, NgbModal } from '@ng-bootstrap/ng-bootstrap';
 import { Subscription } from 'rxjs';
 import { CovidReport } from '../models/covid_report';
+import { MedicoProfile } from '../models/medico_profile';
 import { Patient } from '../models/patient';
 import { DatabaseService } from '../service/database.service';
 import { UploadService } from '../service/uploadStorage.service';
@@ -14,6 +15,9 @@ import { UploadServiceFile } from '../service/uploadStorageFile.service';
   styleUrls: ['./emergenza-covid-doctor.component.css']
 })
 export class EmergenzaCovidComponent implements OnInit {
+
+  showAllPatients : boolean = false;
+  public currentUser = new MedicoProfile();
 
   controllerSection = 0;
   visualizeList = true;
@@ -52,6 +56,10 @@ export class EmergenzaCovidComponent implements OnInit {
   }
 
   ngOnInit(): void {
+
+    const userToConvert = localStorage.getItem('medico');
+    this.currentUser = userToConvert !== null ? JSON.parse(userToConvert) : "";
+
     this.myArray = [];
     const collectionRef = this.firestore.collection('citizens');
     const collectionInstance = collectionRef.valueChanges();
