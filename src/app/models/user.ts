@@ -1,4 +1,3 @@
-
 export abstract class User {
     
     public email: string;
@@ -6,7 +5,7 @@ export abstract class User {
     public uid: string;
     public photoURL: string;
     public emailVerified: boolean;
-    public userType : string; //Andre per farlo andare nel tuo metti che se userType == "user" allora true else false
+    public userType : string; 
 
     constructor(){
         this.email = "";

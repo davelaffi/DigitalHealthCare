@@ -3,11 +3,20 @@ import { AuthService } from 'src/app/service/auth.service';
 import { User } from 'src/app/models/user';
 import { MedicoProfile } from 'src/app/models/medico_profile';
 import { VolunteerProfile } from 'src/app/models/volunteer_profile';
+import {trigger, style, animate, transition} from '@angular/animations';
 
 @Component({
   selector: 'app-sign-up',
   templateUrl: './sign-up.component.html',
-  styleUrls: ['./sign-up.component.css']
+  styleUrls: ['./sign-up.component.css'],
+  animations: [
+    trigger('fade', [ 
+      transition('void => *', [
+        style({ opacity: 0 }), 
+        animate(1000, style({opacity: 1}))
+      ]) 
+    ])
+  ]
 })
 export class SignUpComponent implements OnInit {
 
@@ -42,17 +51,13 @@ export class SignUpComponent implements OnInit {
         this.isSignedIn = false;
       }
     }
- 
 
    async onSignup(){
     
-    console.log("CIAOOOOOOOO");
-
     if(this.userType == "medico"){
       this.onSignupMedico();
     }
     else if(this.userType == "volontario"){
-      console.log("Prova");
       this.onSignupVolunteer();
     }
   }
@@ -77,7 +82,6 @@ export class SignUpComponent implements OnInit {
     } catch (error) {
       window.alert(error);
     }
-
     console.log(this.medicoCreated);
   }
 

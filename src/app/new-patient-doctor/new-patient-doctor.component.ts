@@ -17,6 +17,7 @@ export class NewPatientComponent implements OnInit {
   public CFfromHome : string = "";
   public patientAdded = false;
   isFirstTime = false;
+  progressbarValue = 0;
 
   public ts = 1234;
   public patient : Patient;
@@ -232,11 +233,14 @@ export class NewPatientComponent implements OnInit {
 
   changeSectionGo(){
     this.controllerSection = this.controllerSection + 1;
-    console.log(this.patient.datiPersonali.sesso)
+    this.progressbarValue = ((100/6)*(this.controllerSection-1));
+    console.log(this.progressbarValue);
   }
 
   changeSectionBack(){
     this.controllerSection = this.controllerSection -1;
+    this.progressbarValue = ((100/6)*(this.controllerSection-1));
+    console.log(this.progressbarValue);
   }
 
 

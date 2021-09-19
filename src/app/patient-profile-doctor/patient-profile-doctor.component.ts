@@ -50,10 +50,6 @@ export class PatientProfileComponent implements OnInit {
     const docRef = this.firestore.collection('citizens').doc(this.CF);
     const collectionInstance = docRef.valueChanges();
     collectionInstance.subscribe(ss => this.patient = this.db.createGeneralPatientFromSnapshot(ss));
-    
-    // this.firestore.collection('citizens').doc(this.CF).update({
-    //   photoURL: "Ciao"
-    // });
 
     let dataDoc = this.firestore.collection('citizens').doc(this.CF).collection('data');
     dataDoc.get().subscribe((querySnapshot) => {

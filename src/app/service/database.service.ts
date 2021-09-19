@@ -121,70 +121,70 @@ export class DatabaseService {
     return resultPatient;
   }
 
-  createPatientFromSnapshot(patientFromArray : any, resultPatient : Patient){
+  createPatientFromSnapshot(patientFromDB : any, resultPatient : Patient){
     
     //Dati personali
-    resultPatient.CF = patientFromArray.CF
-    resultPatient.nome = patientFromArray.nome;
-    resultPatient.cognome = patientFromArray.cognome;
-    resultPatient.datiPersonali.sesso = patientFromArray.sesso;
-    resultPatient.datiPersonali.dataNascita = patientFromArray.dataNascita;
-    resultPatient.datiPersonali.comuneNascita = patientFromArray.comuneNascita;
-    resultPatient.datiPersonali.indirizzoDomicilio = patientFromArray.indirizzoDomicilio;
-    resultPatient.datiPersonali.CAP = patientFromArray.CAP;
-    resultPatient.datiPersonali.comuneDomicilio = patientFromArray.comuneDomicilio;
-    resultPatient.datiPersonali.telefono = patientFromArray.telefono;
-    resultPatient.datiPersonali.email = patientFromArray.email;
-    resultPatient.datiPersonali.pec = patientFromArray.pec;
-    resultPatient.datiPersonali.provinciaNascita = patientFromArray.provinciaNascita;
-    resultPatient.datiPersonali.provinciaDomicilio = patientFromArray.provinciaDomicilio;
+    resultPatient.CF = patientFromDB.CF
+    resultPatient.nome = patientFromDB.nome;
+    resultPatient.cognome = patientFromDB.cognome;
+    resultPatient.datiPersonali.sesso = patientFromDB.sesso;
+    resultPatient.datiPersonali.dataNascita = patientFromDB.dataNascita;
+    resultPatient.datiPersonali.comuneNascita = patientFromDB.comuneNascita;
+    resultPatient.datiPersonali.indirizzoDomicilio = patientFromDB.indirizzoDomicilio;
+    resultPatient.datiPersonali.CAP = patientFromDB.CAP;
+    resultPatient.datiPersonali.comuneDomicilio = patientFromDB.comuneDomicilio;
+    resultPatient.datiPersonali.telefono = patientFromDB.telefono;
+    resultPatient.datiPersonali.email = patientFromDB.email;
+    resultPatient.datiPersonali.pec = patientFromDB.pec;
+    resultPatient.datiPersonali.provinciaNascita = patientFromDB.provinciaNascita;
+    resultPatient.datiPersonali.provinciaDomicilio = patientFromDB.provinciaDomicilio;
 
     //Dati Medico
-    resultPatient.datiMedico.codiceEsenzione = patientFromArray.codiceEsenzione;
-    resultPatient.datiMedico.retiPatologieAssistito = patientFromArray.retiPatologieAssistito;
-    resultPatient.datiMedico.capacitaMotoriaAssistito = patientFromArray.capacitaMotoriaAssistito;
-    resultPatient.datiMedico.attivitaLavorativa = patientFromArray.attivitaLavorativa;
-    resultPatient.datiMedico.patologieCronicheRilevanti = patientFromArray.patologieCronicheRilevanti;
-    resultPatient.datiMedico.organiMancanti = patientFromArray.organiMancanti;
-    resultPatient.datiMedico.trapianti = patientFromArray.trapianti;
-    resultPatient.datiMedico.rilevantiMalformazioni = patientFromArray.rilevantiMalformazioni;
-    resultPatient.datiMedico.reazioniAvverseFarmaciAlimenti = patientFromArray.reazioniAvverseFarmaciAlimenti;
-    resultPatient.datiMedico.allergieCutaneeRespiratorieSistemiche = patientFromArray.allergieCutaneeRespiratorieSistemiche;
-    resultPatient.datiMedico.allergieVelenoImenotteri = patientFromArray.allergieVelenoImenotteri;
-    resultPatient.datiMedico.protesi = patientFromArray.protesi;
-    resultPatient.datiMedico.ausili = patientFromArray.ausili;
-    resultPatient.datiMedico.terapieFarmacologicheCroniche = patientFromArray.terapieFarmacologicheCroniche;
-    resultPatient.datiMedico.anamnesiFamigliari = patientFromArray.anamnesiFamigliari;
-    resultPatient.datiMedico.fattoriRischio = patientFromArray.fattoriRischio;
-    resultPatient.datiMedico.terapieFarmacologiche = patientFromArray.terapieFarmacologiche;
-    resultPatient.datiMedico.vaccinazioni = patientFromArray.vaccinazioni;
-    resultPatient.datiMedico.contattoCareGiver = patientFromArray.contattoCareGiver;
-    resultPatient.datiMedico.telefonoCareGiver = patientFromArray.telefonoCareGiver;
-    resultPatient.datiMedico.donazioneOrgani = patientFromArray.donazioneOrgani;
-    resultPatient.datiMedico.patologieInAtto = patientFromArray.patologieInAtto;
-    resultPatient.datiMedico.gravidanzeParti = patientFromArray.gravidanzeParti;
-    resultPatient.datiMedico.altezza = patientFromArray.altezza;
-    resultPatient.datiMedico.peso = patientFromArray.peso;
-    resultPatient.datiMedico.pressioneArteriosa = patientFromArray.pressioneArteriosa;
-    resultPatient.datiMedico.BMI = patientFromArray.BMI;
-    resultPatient.datiMedico.ADI = patientFromArray.ADI;
-    resultPatient.datiMedico.ADP = patientFromArray.ADP;
-    resultPatient.datiMedico.gruppoSanguigno = patientFromArray.gruppoSanguigno;
-    resultPatient.datiMedico.fattoreRH = patientFromArray.fattoreRH;
+    resultPatient.datiMedico.codiceEsenzione = patientFromDB.codiceEsenzione;
+    resultPatient.datiMedico.retiPatologieAssistito = patientFromDB.retiPatologieAssistito;
+    resultPatient.datiMedico.capacitaMotoriaAssistito = patientFromDB.capacitaMotoriaAssistito;
+    resultPatient.datiMedico.attivitaLavorativa = patientFromDB.attivitaLavorativa;
+    resultPatient.datiMedico.patologieCronicheRilevanti = patientFromDB.patologieCronicheRilevanti;
+    resultPatient.datiMedico.organiMancanti = patientFromDB.organiMancanti;
+    resultPatient.datiMedico.trapianti = patientFromDB.trapianti;
+    resultPatient.datiMedico.rilevantiMalformazioni = patientFromDB.rilevantiMalformazioni;
+    resultPatient.datiMedico.reazioniAvverseFarmaciAlimenti = patientFromDB.reazioniAvverseFarmaciAlimenti;
+    resultPatient.datiMedico.allergieCutaneeRespiratorieSistemiche = patientFromDB.allergieCutaneeRespiratorieSistemiche;
+    resultPatient.datiMedico.allergieVelenoImenotteri = patientFromDB.allergieVelenoImenotteri;
+    resultPatient.datiMedico.protesi = patientFromDB.protesi;
+    resultPatient.datiMedico.ausili = patientFromDB.ausili;
+    resultPatient.datiMedico.terapieFarmacologicheCroniche = patientFromDB.terapieFarmacologicheCroniche;
+    resultPatient.datiMedico.anamnesiFamigliari = patientFromDB.anamnesiFamigliari;
+    resultPatient.datiMedico.fattoriRischio = patientFromDB.fattoriRischio;
+    resultPatient.datiMedico.terapieFarmacologiche = patientFromDB.terapieFarmacologiche;
+    resultPatient.datiMedico.vaccinazioni = patientFromDB.vaccinazioni;
+    resultPatient.datiMedico.contattoCareGiver = patientFromDB.contattoCareGiver;
+    resultPatient.datiMedico.telefonoCareGiver = patientFromDB.telefonoCareGiver;
+    resultPatient.datiMedico.donazioneOrgani = patientFromDB.donazioneOrgani;
+    resultPatient.datiMedico.patologieInAtto = patientFromDB.patologieInAtto;
+    resultPatient.datiMedico.gravidanzeParti = patientFromDB.gravidanzeParti;
+    resultPatient.datiMedico.altezza = patientFromDB.altezza;
+    resultPatient.datiMedico.peso = patientFromDB.peso;
+    resultPatient.datiMedico.pressioneArteriosa = patientFromDB.pressioneArteriosa;
+    resultPatient.datiMedico.BMI = patientFromDB.BMI;
+    resultPatient.datiMedico.ADI = patientFromDB.ADI;
+    resultPatient.datiMedico.ADP = patientFromDB.ADP;
+    resultPatient.datiMedico.gruppoSanguigno = patientFromDB.gruppoSanguigno;
+    resultPatient.datiMedico.fattoreRH = patientFromDB.fattoreRH;
 
     //Dati Volontario
-    resultPatient.datiVolontario.numeroCartaIdentita = patientFromArray.numeroCartaIdentità;
-    resultPatient.datiVolontario.comuneRilascio = patientFromArray.comuneRilascio;
-    resultPatient.datiVolontario.dataScadenza = patientFromArray.dataScadenza;
-    resultPatient.datiVolontario.contatto1 = patientFromArray.contatto1;
-    resultPatient.datiVolontario.telefono1 = patientFromArray.telefono1;
-    resultPatient.datiVolontario.contatto2 = patientFromArray.contatto2;
-    resultPatient.datiVolontario.telefono2 = patientFromArray.telefono2;
-    resultPatient.datiVolontario.viveSolo = patientFromArray.viveSolo;
-    resultPatient.datiVolontario.areaUtenza = patientFromArray.areaUtenza;
-    resultPatient.datiVolontario.servizioAssociazione = patientFromArray.servizioAssociazione;
-    resultPatient.datiVolontario.codiceATS = patientFromArray.codiceATS;
-    resultPatient.datiVolontario.dataRilascio = patientFromArray.dataRilascio;
+    resultPatient.datiVolontario.numeroCartaIdentita = patientFromDB.numeroCartaIdentità;
+    resultPatient.datiVolontario.comuneRilascio = patientFromDB.comuneRilascio;
+    resultPatient.datiVolontario.dataScadenza = patientFromDB.dataScadenza;
+    resultPatient.datiVolontario.contatto1 = patientFromDB.contatto1;
+    resultPatient.datiVolontario.telefono1 = patientFromDB.telefono1;
+    resultPatient.datiVolontario.contatto2 = patientFromDB.contatto2;
+    resultPatient.datiVolontario.telefono2 = patientFromDB.telefono2;
+    resultPatient.datiVolontario.viveSolo = patientFromDB.viveSolo;
+    resultPatient.datiVolontario.areaUtenza = patientFromDB.areaUtenza;
+    resultPatient.datiVolontario.servizioAssociazione = patientFromDB.servizioAssociazione;
+    resultPatient.datiVolontario.codiceATS = patientFromDB.codiceATS;
+    resultPatient.datiVolontario.dataRilascio = patientFromDB.dataRilascio;
 
     return resultPatient;
   }

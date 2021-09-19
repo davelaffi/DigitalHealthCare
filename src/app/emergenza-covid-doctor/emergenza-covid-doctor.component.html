@@ -151,7 +151,7 @@
             </div>
             <div>
                 <button class="modified-button vertical-padding2"
-                    [ngClass]="{'non-display-section' : selectedCF != currentUser.CF }"
+                    [ngClass]="{'non-display-section' : patient.medicoCF != currentUser.CF }"
                     (click)="triggerModal(modalData)">Aggiungi nuovo
                     referto</button>
             </div>

@@ -30,6 +30,7 @@ import { EmergenzaCovidVolunteerComponent } from './emergenza-covid-volunteer/em
 import { ListPatientVolunteerComponent } from './list-patient-volunteer/list-patient-volunteer.component';
 import { PatientProfileVolunteerComponent } from './patient-profile-volunteer/patient-profile-volunteer.component';
 import { AddNewPatientVolunteerComponent } from './add-new-patient-volunteer/add-new-patient-volunteer.component';
+import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 
 
 
@@ -58,6 +59,7 @@ import { AddNewPatientVolunteerComponent } from './add-new-patient-volunteer/add
   ],
   imports: [
     BrowserModule,
+    BrowserAnimationsModule,
     AppRoutingModule,
     FormsModule,
     AngularFireModule.initializeApp(environment.firebase),

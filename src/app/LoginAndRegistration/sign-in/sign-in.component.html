@@ -1,16 +1,16 @@
 
-<div class="signup-form">
+<div @fade class="signup-form">
   <form (submit)="onSignin(email.value, password.value)" ngNativeValidate #formLogin>
-    <h2>Login</h2>
+    <h2>Login<img src="./assets/logo.jpg" alt="" width="50" height="50"></h2>
       <p class="hint-text">Benvenuto, effettua il login</p>
     <div class="form-group">
-      <input type="text" class="form-control" placeholder="Email" required #email/>
+      <input @fade type="text" class="form-control" placeholder="Email" required #email/>
     </div>
     <div class="form-group">
-      <input type="password" class="form-control" placeholder="Password" required #password/>
+      <input @fade type="password" class="form-control" placeholder="Password" required #password/>
     </div>
     <div class="form-group text-center">
-      <button type="submit" class="btn btn-primary btn-lg">Login</button>
+      <button type="submit" class="btn btn-primary btn-lg btn-round">Login</button>
     </div>
     <div class="text-center vertical-padding10">Password dimenticata? <a style="color : #007bff;" href="/forgotPassword">Clicca qui</a></div>
     <div class="text-center ">Non hai ancora un account? <a style="color : #007bff;" href="/signUp">Registrati</a></div>

@@ -5,13 +5,39 @@ import { AuthService } from '../service/auth.service';
 import { DatabaseService } from '../service/database.service';
 import {NgbModal} from '@ng-bootstrap/ng-bootstrap';
 import { Router } from '@angular/router';
-import { DatePipe } from '@angular/common'
 import { Subscription } from 'rxjs';
+import {trigger, style, animate, transition} from '@angular/animations';
 
 @Component({
   selector: 'app-home-doctor',
   templateUrl: './home-doctor.component.html',
-  styleUrls: ['./home-doctor.component.css']
+  styleUrls: ['./home-doctor.component.css'],
+  animations: [
+    trigger('fade1', [ 
+      transition('void => *', [
+        style({ opacity: 0 }), 
+        animate(1000, style({opacity: 1}))
+      ]) 
+    ]),
+    trigger('fade2', [ 
+      transition('void => *', [
+        style({ opacity: 0 }), 
+        animate(1500, style({opacity: 1}))
+      ]) 
+    ]),
+    trigger('fade3', [ 
+      transition('void => *', [
+        style({ opacity: 0 }), 
+        animate(2000, style({opacity: 1}))
+      ]) 
+    ]),
+    trigger('fade4', [ 
+      transition('void => *', [
+        style({ opacity: 0 }), 
+        animate(2500, style({opacity: 1}))
+      ]) 
+    ]),
+  ]
 })
 export class HomeComponent implements OnInit {
 

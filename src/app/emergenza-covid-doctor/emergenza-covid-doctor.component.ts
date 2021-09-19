@@ -147,11 +147,3 @@ export class EmergenzaCovidComponent implements OnInit {
   }
 
 }
-
-// let dataDoc = docRef.collection('covid19');
-//       let dataDocRef = dataDoc.ref.orderBy('date');
-
-//       dataDocRef.get().then( res => {
-//         res.forEach((doc) => console.log(doc.id))
-//       }
-//       )
