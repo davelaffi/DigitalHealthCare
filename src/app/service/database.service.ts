@@ -32,6 +32,9 @@ export class DatabaseService {
   }
 
   createPatientFromSnapshotMedico(patientFromArray : any, resultPatient : Patient){
+
+    console.log("Ciaoo:")
+    console.log(patientFromArray.patologieCronicheRilevanti)
     
     //Dati personali
     resultPatient.CF = patientFromArray.CF

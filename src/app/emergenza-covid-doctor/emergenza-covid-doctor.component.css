@@ -3,10 +3,6 @@
     margin-bottom: 1.0em;
 }
 
-.vertical-padding15{
-    margin-top: 1.5em; 
-    margin-bottom: 1.5em;
-}
 
 .vertical-padding2{
     margin-top: 2em;
@@ -310,24 +306,6 @@
   -webkit-animation-delay: 0.4s;
   -moz-animation-delay: 0.4s;
   animation-delay: 0.4s;
-}
-
-.fadeIn.second {
-  -webkit-animation-delay: 0.6s;
-  -moz-animation-delay: 0.6s;
-  animation-delay: 0.6s;
-}
-
-.fadeIn.third {
-  -webkit-animation-delay: 0.8s;
-  -moz-animation-delay: 0.8s;
-  animation-delay: 0.8s;
-}
-
-.fadeIn.fourth {
-  -webkit-animation-delay: 1s;
-  -moz-animation-delay: 1s;
-  animation-delay: 1s;
 }
 
 /* Simple CSS3 Fade-in Animation */

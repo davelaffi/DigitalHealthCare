@@ -31,6 +31,8 @@ export class PatientProfileComponent implements OnInit {
   editable = false;
   ispatient = false;
 
+  newPatologia = "";
+
   constructor(
     private route: ActivatedRoute,
     private firestore: AngularFirestore,
@@ -83,6 +85,35 @@ export class PatientProfileComponent implements OnInit {
 
   changeSectionGo(x: number) {
     this.controllerSection = x;
+  }
+
+  cancelItemArray(i: number){
+    console.log(i)
+    const newPatologie = this.patient.datiMedico.patologieCronicheRilevanti.filter((item) => item != this.patient.datiMedico.patologieCronicheRilevanti[i])
+
+    this.firestore.collection('citizens').doc(this.patient.CF).collection('data').doc(this.lastChosenTS)
+      .update({
+        patologieCronicheRilevanti: newPatologie
+      }).then(async res => {
+        console.log("Eliminated");}).catch((error) => {
+          this.ispatient = true;
+          window.alert(error)
+        })
+  }
+
+  addNewPatologia(){
+    this.patient.datiMedico.patologieCronicheRilevanti.push(this.newPatologia)
+
+    this.firestore.collection('citizens').doc(this.patient.CF).collection('data').doc(this.lastChosenTS)
+      .update({
+        patologieCronicheRilevanti: this.patient.datiMedico.patologieCronicheRilevanti
+      }).then(async res => {
+        console.log("Added");
+        this.newPatologia = ""
+      }).catch((error) => {
+          this.ispatient = true;
+          window.alert(error)
+        })
   }
 
   addNewPatient() {

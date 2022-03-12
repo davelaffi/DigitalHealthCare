@@ -122,6 +122,8 @@ export class NewPatientComponent implements OnInit {
     
   }
 
+  
+
   addNewPatient(){
 
     console.log(this.patient);

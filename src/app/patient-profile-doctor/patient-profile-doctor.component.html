@@ -331,11 +331,22 @@
                       </div>
 
                       <div class="col-sm-9 text-secondary">
-                        <div *ngFor="let item of patient.datiMedico.patologieCronicheRilevanti">
-                          {{item}}
-                          <hr>
+                        <div class="row">
+                          <div *ngFor="let item of patient.datiMedico.patologieCronicheRilevanti; let i = index">
+                              {{item}} 
+                              <button class="btn btn-danger" [ngClass]="{'non-display-section' : !editable }" id="item" value="item" (click)="cancelItemArray(i)">x</button>
+                              <hr>
+                          </div>
                         </div>
+                          <div class="col-sm-9 text-secondary" [ngClass]="{'non-display-section' : !editable }">
+                            <div class="col">
+                              <input type="text" [(ngModel)]="newPatologia" name="newPatologia"
+                                class="form-control" id="newPatologia" value="newPatologia">
+                              <button class="btn btn-success" [ngClass]="{'non-display-section' : !editable }" id="item" value="item" (click)="addNewPatologia()">+</button>
+                            </div>
+                          </div>
                       </div>
+
                     </div>
                   </div>
 
@@ -606,9 +617,19 @@
                       </div>
 
                       <div class="col-md-9 text-secondary text-center">
-                        <div *ngFor="let item of patient.datiMedico.patologieCronicheRilevanti">
-                          {{item}}
+                        <div class="row">
+                        <div *ngFor="let item of patient.datiMedico.patologieCronicheRilevanti; let i = index">
+                          {{item}} 
+                          <button class="btn btn-danger" [ngClass]="{'non-display-section' : !editable }" id="item" value="item" (click)="cancelItemArray(i)">x</button>
                           <hr>
+                        </div>
+                      </div>
+                      <div class="col-sm-9 text-secondary" [ngClass]="{'non-display-section' : !editable }">
+                        <div class="row">
+                        <input type="text" [(ngModel)]="newPatologia" name="newPatologia"
+                          class="form-control" id="newPatologia" value="newPatologia">
+                          <button class="btn btn-success" [ngClass]="{'non-display-section' : !editable }" id="item" value="item" (click)="addNewPatologia()">+</button>
+                        </div>
                         </div>
                       </div>
                     </div>

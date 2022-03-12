@@ -1,7 +1,10 @@
 
 <div @fade class="signup-form">
   <form (submit)="onSignin(email.value, password.value)" ngNativeValidate #formLogin>
-    <h2>Login<img src="./assets/logo.jpg" alt="" width="50" height="50"></h2>
+    <div class="col text-center">
+      <h2>Login</h2>
+      <img src="./assets/logo.jpg" alt="" width="50" height="50">
+  </div>
       <p class="hint-text">Benvenuto, effettua il login</p>
     <div class="form-group">
       <input @fade type="text" class="form-control" placeholder="Email" required #email/>
